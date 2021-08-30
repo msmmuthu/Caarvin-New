@@ -1,0 +1,38 @@
+	#rows_table tr>th{
+	padding:5px;
+	border-style:solid;
+	border-width:thin;
+	border-color:#999999;
+	}
+	#example tr>td{
+	padding:5px;
+	border: 1px solid #ddd;
+	
+	}
+	#example tr>th{
+	padding:5px;
+	width: 15%;
+	}
+	#example thead{
+	background:#ccc;
+	}
+	.dataTables_filter label:after{
+	display:none;
+	}
+	.dataTables_filter label:before{
+	display:none;
+	}
+	.dataTables_length label:before{
+	display:none;
+	}
+	.dataTables_length label:after{
+	display:none;
+	}
+	.pagination{
+	float:right;
+	}
+	.pagination li{
+	list-style-type: none;
+	float:left;
+	padding: 0 10px;
+	}

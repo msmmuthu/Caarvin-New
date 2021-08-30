@@ -1,0 +1,124 @@
+body{
+    font-size: 90% !important;
+}
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -12rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 12rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -12rem;
+  }
+}
+.dashbord_menu li a{
+    background: #f0f3f5;
+    border-radius: 0px;
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee
+}
+.sub_link{
+    float: right;
+}
+.dashbord_menu .collapse .nav-link{
+    color: #7b7272;
+    background: transparent;
+    border-radius: 0px;
+    border: 1px;
+}
+.dashbord_menu .collapse .nav-link:hover{
+    color: #fff;
+    background: #417bff;
+    border-radius: 0px;
+}
+.dashbord_menu .collapse{
+    background: #f8f9fa;
+}
+.dashbord_menu .nav-link.active, .nav-pills .show>.nav-link{
+    background: #686868 !important;
+    border-radius: 0px !important;
+}
+.href_dt_tooltip{
+    color: #000;
+    font-weight: 500;
+}
+.href_dt_tooltip:hover{
+    color: #000;
+    text-decoration: none;
+}
+
+/*Croppie*/
+label.cabinet{
+	display: block;
+	cursor: pointer;
+	
+}
+
+label.cabinet input.file{
+	position: relative;
+	
+	width: auto;
+	opacity: 0;
+	-moz-opacity: 0;
+  filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+  margin-top:-30px;
+}
+
+#upload-demo{
+	/*width: 350px;*/
+	height: 486px;
+  padding-bottom:25px;
+}
+.crop_logo figcaption {
+ 
+bottom: 0;
+    color: #c2cbd4;
+    width: 100%;
+    padding-left: 9px;
+    padding-bottom: 5px;
+    text-shadow: 0 0 10px #000;
+    font-size: 21px;
+}
+
+/*End Croppie*/
+
+
+/*Map*/
+
+ #map{
+        overflow: hidden !important;
+        width:100%;
+        height:400px; 
+        }
+        
+/*  End Map*/

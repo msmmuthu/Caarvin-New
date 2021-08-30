@@ -1,0 +1,488 @@
+body {
+    font-family: "Muli", sans-serif;
+}
+
+:root {
+    --input-padding-x: 1.5rem;
+    --input-padding-y: 0.75rem;
+}
+
+.banner_title {
+    color: #666666;
+}
+
+.form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-label-group input,
+.form-label-group textarea {
+    height: auto;
+    border-radius: 5px;
+}
+
+.form-label-group>input,
+.form-label-group>label {
+    padding: var(--input-padding-y) var(--input-padding-x);
+}
+
+.form-label-group>label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+    /* Override default `<label>` margin */
+    line-height: 1.5;
+    color: #495057;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    transition: all 0.1s ease-in-out;
+}
+
+.form-label-group input::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::placeholder {
+    color: transparent;
+}
+
+.form-label-group input:not(:placeholder-shown),
+.form-label-group textarea:not(:placeholder-shown) {
+    padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (3 / 3));
+    padding-bottom: calc(var(--input-padding-y) / 3);
+    resize: none;
+}
+
+.form-label-group input:not(:placeholder-shown)~label,
+.form-label-group textarea:not(:placeholder-shown)~label {
+    padding-top: calc(var(--input-padding-y) / 3);
+    padding-bottom: calc(var(--input-padding-y) / 3);
+    color: #777;
+}
+
+a {
+    color: #3c77c5;
+}
+
+.active {
+    background: #3c77c5;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.modal-body {}
+
+.modal-content {
+    background-color: none;
+    border: 0px;
+}
+
+.modal-header {
+    background: #3c77c5;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #3c77c5;
+    border-color: #3c77c5;
+}
+
+.btn-outline-primary {
+    color: #3c77c5;
+    border-color: #3c77c5;
+}
+
+.modal-title {
+    color: #fff;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #3c77c5;
+    border-color: #3c77c5;
+}
+
+.img-thumbnail {
+    max-width: 180px;
+}
+
+input[type="file"] {}
+
+.red {
+    color: #cc0000;
+    font-weight: 500;
+}
+
+.green {
+    color: #4cb34c;
+    font-weight: 500;
+}
+
+.hint {
+    color: #a09e9e;
+    font-style: italic;
+}
+
+.subtitles {
+    color: #333333;
+}
+
+.carousel-indicators li {
+    background-color: #3c77c5;
+}
+
+.carousel-inner .active {
+    background: none;
+}
+
+.profile_icon {
+    padding: 5px;
+    background: #ffffff;
+    margin: 10px;
+    -webkit-box-shadow: -2px 4px 10px -4px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -2px 4px 10px -4px rgba(0, 0, 0, 0.75);
+    box-shadow: -2px 4px 10px -4px rgba(0, 0, 0, 0.75);
+}
+
+.navbar-expand-lg {
+    width: 100%;
+}
+
+.navbar {
+    padding: 0px;
+}
+
+.location {
+    padding: 0rem 0.75rem;
+    color: #6c757d;
+    font-style: italic;
+    /*border-bottom: 1px dashed #ccc;*/
+}
+
+#suggestion_search {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    margin-top: 5px;
+    z-index: 1;
+    width: 100%;
+    position: absolute;
+}
+
+.search_hover:hover {
+    background: #3c77c5;
+    color: #fff;
+    border-radius: 4px;
+    padding: 6px 10px;
+}
+
+.search_hover {
+    color: #333333;
+    border-radius: 4px;
+    padding: 6px 10px;
+}
+
+.cat_thum {
+    border: 1px solid #eee;
+    -webkit-box-shadow: 0px 7px 11px -9px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 7px 11px -9px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 7px 11px -9px rgba(0, 0, 0, 0.75);
+}
+
+.bg-secondary {
+    background: #343a4026 !important;
+}
+
+.mylabel {
+    color: #3f4146;
+    font-weight: bold;
+}
+
+.card-header {
+    padding: 0px;
+}
+
+.box-filter {
+    height: 250px;
+    overflow-y: scroll;
+    overflow: auto;
+    overflow-x: hidden;
+    margin-top: 10px;
+}
+
+.box-filter-nonscroll {}
+
+@media screen and (max-width: 992px) {
+    .logo {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 992px) {}
+
+.btn,
+.dropdown-menu,
+.form-control,
+h2,
+p {
+    font-size: medium;
+}
+
+
+/* On screens that are 600px or less, set the background color to olive */
+
+@media screen and (max-width: 600px) {
+    .logo {
+        width: 100%;
+    }
+    body {
+        font-size: 85% !important;
+    }
+    .menus a {
+        white-space: normal;
+        font-size: 10px;
+    }
+}
+
+
+/*drop menu*/
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu a::after {
+    transform: rotate(-90deg);
+    position: absolute;
+    right: 6px;
+    top: 0.8em;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
+}
+
+#loading_filter {
+    background: #ffffffd9;
+    position: absolute;
+    width: 100%;
+    height: 10000px;
+    z-index: 900000000000;
+    text-align: center;
+    vertical-align: middle;
+    padding: 20% 0%;
+}
+
+
+/*drop menu end*/
+
+
+/* Updated Styles Start*/
+
+.postAdImgModalDialog {
+    max-width: 90vw;
+    height: 90vh;
+}
+
+.postAdImgModal {
+    max-height: 80vh;
+    overflow-y: scroll;
+}
+
+.imgHolderContainer {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.imgContainer {
+    width: 170px;
+    margin: 0 2px;
+}
+
+.img_preview {
+    margin-right: 0px;
+    margin-left: 0px;
+    height: 207px;
+}
+
+.imgAlignBottomCls {
+    display: flex;
+    align-items: flex-end;
+}
+
+.previewImgCls {
+    position: relative;
+}
+
+.previewImgRemCls {
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    border-radius: 20px;
+    background-color: red;
+    width: 25px;
+    height: 25px;
+    font-weight: bold;
+    line-height: 2px;
+    display: none;
+}
+
+.submitBtnCls {
+    width: 100%;
+    margin: 1rem;
+}
+
+.editImgContainerCls {
+    height: 385px;
+}
+
+.img-thumbnail {
+    max-width: 150px;
+    height: 150px;
+}
+
+.previewImgBrowseCls {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.fileUploadCls {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.usernameBtnCls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#fileUploadErrHolderId {
+    display: none;
+}
+
+.fileUploadErrMsgCls {
+    font-size: 16px;
+    color: red;
+    text-align: right;
+}
+
+@media screen and (max-width: 700px) {
+    .userNameCls {
+        white-space: nowrap;
+        width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .chipLocNameCls {
+        width: 280px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .mobileAdjClsRow {
+        display: flex;
+        flex-direction: column;
+    }
+    .mobileAdjClsCol {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .chipLocNameCls {
+        width: 150px;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .chipLocNameCls {
+        width: 250px;
+    }
+}
+
+.chip {
+    display: inline-block;
+    height: 32px;
+    padding: 0 12px;
+    margin: 5px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 32px;
+    color: rgba(0, 0, 0, 0.6);
+    background-color: #eceff1;
+    border-radius: 16px;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+}
+
+.chipCloseCls {
+    float: right;
+    padding-left: 8px;
+    font-size: 16px;
+    line-height: 32px;
+    cursor: pointer;
+    -webkit-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+    opacity: 0.5;
+    color: #000;
+    cursor: pointer;
+}
+
+.locationChipHolderCls {
+    display: none;
+}
+
+.locErrTxtCls {
+    color: red;
+    font-size: 13px;
+    text-align: right;
+    display: none;
+}
+
+.srchMultiLocBtnCls {
+    margin: 5px;
+    padding: 5px;
+    float: right;
+    display: none;
+}
+
+.chipLocNameCls {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: left;
+}
+
+
+/* Updated Styles end*/

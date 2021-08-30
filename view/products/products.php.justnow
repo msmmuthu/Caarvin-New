@@ -1,0 +1,661 @@
+<?php
+
+class products{
+
+    public function select() {
+        ?>
+        
+        
+        <?php
+    }
+    
+   
+
+	
+	
+	 public function list_products() {
+	 
+	 ?>
+        
+        
+	 <div class="rows">
+	<div class="container">
+    <div class="bor">
+    	<?php
+		$this->leftMenu();
+		?>
+	
+        <div class="categories-right">     
+        
+      <div class="filter">
+        	<div class="filter-list">
+            	
+            </div>
+            
+            <div class="space_10"></div>
+            <?php echo $this->sorting(); ?>
+        </div>
+        <script>
+        function MM_jumpMenu(targ,selObj,restore){ //v3.0
+	
+	  eval(targ+".location='"+"?module=products&action=view&cat_id=<?php echo $_REQUEST['cat_id']; ?>&sort="+$("#sorting").val()+"'");
+	  if (restore) selObj.selectedIndex=0;
+	}
+	</script>
+
+        <div class="rows">
+        <?php
+		 if(isset($_SESSION['pic']['biscuit']['city'])){ $city = $_SESSION['pic']['biscuit']['city'];}
+		  else{ $city = ""; }
+		  
+		  if(isset($_REQUEST['sort']) and $_REQUEST['sort']==1){
+		 
+		 $order = "pic_price ASC";
+		 
+		}
+		elseif(isset($_REQUEST['sort']) and $_REQUEST['sort']==2){
+		
+		$order = "pic_price DESC";
+		
+		}
+		else{
+		$order = "pic_id DESC";
+		
+		}
+		  
+		?>
+        
+        <?php
+		
+		$query_ads = mysql_query("select * from pic_addpost where pic_category=".$_REQUEST['cat_id']." and pic_post_city='".$city."' order by $order");
+		while($row = mysql_fetch_object($query_ads)) {
+		?>
+        	<a href="index.php?action=view&module=product_detail&ads_id=<?php echo $row->pic_ads_id; ?>">
+        	<div class="list-view">
+            	<div class="list-view-img">
+                <?php
+				$query_img = mysql_query("select * from pic_addpost_images where addpost_id='$row->pic_ads_id' order by ad_image_id ASC limit 1");
+				$row_img = mysql_fetch_object($query_img);
+				
+				?>
+                <img src="media/small/<?php echo $row_img->ad_image_url; ?>"> 
+                </div>
+                <div class="list-view-cont">
+                	<div class="list-title"><?php echo $row->pic_title; ?></div>
+                    <p><?php echo $row->pic_discription; ?></p>
+                    <b><?php echo $row->pic_add_taluk." , ".$row->pic_post_city." District"; ?></b>
+                    
+                    <div class="recent-time"><?php echo $row->pic_postdate; ?></div>
+                </div>
+                <div class="list-view-amt">
+                	<b><i><img src="css/images/inr_symbol.png" /></i><?php echo $row->pic_price; ?></b>
+                </div>
+            </div>
+            </a>
+            
+            <?php
+			}
+			?>
+            
+            
+            <?php
+		$query_ads2 = mysql_query("select * from pic_addpost where pic_category=".$_REQUEST['cat_id']." and pic_post_city!='".$city."' order by $order");
+		while($row = mysql_fetch_object($query_ads2)) {
+		?>
+        	<a href="index.php?action=view&module=product_detail&ads_id=<?php echo $row->pic_ads_id; ?>">
+        	<div class="list-view">
+            	<div class="list-view-img">
+                <?php
+				$query_img = mysql_query("select * from pic_addpost_images where addpost_id='$row->pic_ads_id' order by ad_image_id ASC limit 1");
+				$row_img = mysql_fetch_object($query_img);
+				
+				?>
+                <img src="media/small/<?php echo $row_img->ad_image_url; ?>"> 
+                </div>
+                <div class="list-view-cont">
+                	<div class="list-title"><?php echo $row->pic_title; ?></div>
+                    <p><?php echo $row->pic_discription; ?></p>
+                     <b><?php echo $row->pic_add_taluk." , ".$row->pic_post_city." District"; ?></b>
+                    
+                    <div class="recent-time"><?php echo $row->pic_postdate; ?></div>
+                </div>
+                <div class="list-view-amt">
+                	<b><i><img src="css/images/inr_symbol.png" /></i><?php echo $row->pic_price; ?></b>
+                </div>
+            </div>
+            </a>
+            
+            <?php
+			}
+			?>
+            
+            
+            
+        </div>
+        
+        <div class="space_20"></div>
+        
+        <div class="page-nav">
+        	<ul>
+            	<li><a href="#">4</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">2</a></li>
+                <li><a class="active-1" href="#">1</a></li>
+            </ul>
+        </div>       
+            
+        </div>
+
+        </div>
+    	
+        
+        
+    </div>
+</div>
+	 <?php
+	 }
+	 
+	  public function leftMenu() {
+	  
+	  ?>
+	  <link rel="stylesheet" type="text/css" href="css/bootstrap-select.css">
+  
+  
+      <div class="categories-left">
+      
+
+
+		
+     <form id="filter_form" name="filter_form" method="post" action="index.php" class="form-horizontal" role="form" >
+     <input type="hidden" name="module" value="products">
+     <input type="hidden" name="action" value="view">
+     <input type="hidden" name="filter" value="yes">
+     <input type="hidden" name="cat_id" value="<?php echo $_REQUEST['cat_id']; ?>">
+
+<script type="text/javascript" src="js/bootstrap-list-filter.src.js"></script>
+<script type="text/javascript" src="js/bootstrap-slider.js"></script>
+<link rel="stylesheet" type="text/css" href="css/accordion.css" />
+<script type="text/javascript" src="js/scriptbreaker-multiple-accordion-1.js"></script>
+<script language="JavaScript">
+
+$(document).ready(function() {
+	$(".topnav").accordion({
+		accordion:false,
+		speed: 500,
+		closedSign: '+',
+		openedSign: '-'
+	});
+});
+
+$(document).ready(function() {
+	
+	$('#showLess').hide();
+	
+    size_li = $("#myList li").size();
+	
+    x=2;
+    $('#myList li:lt('+x+')').show();
+    $('#loadMore').click(function () {
+        x= (x+2 <= size_li) ? x+2 : size_li;
+        $('#myList li:lt('+x+')').show();
+		
+		if(size_li==x){
+			$('#loadMore').hide();
+			$('#showLess').show();
+    	}
+		else{
+			$('#loadMore').show();
+			$('#showLess').hide();
+			
+		}
+    });
+    $('#showLess').click(function () {
+        x=2;
+        $('#myList li').not(':lt('+x+')').hide();
+		
+		if(x>1){
+			$('#loadMore').show();
+			$('#showLess').hide();
+    	}
+		else{
+			$('#loadMore').hide();
+			$('#showLess').show();
+			
+		}
+    });
+    
+});
+
+</script>
+
+<?php
+// main query
+$price_filter_query=mysql_query("select DISTINCT addpost_fields_title from pic_addpost_field where addpost_fields_categories_id = ".$_REQUEST['cat_id']." ORDER BY addpost_field_id ASC ");
+?>
+<ul class="topnav">
+<li>
+<a style="background:#6a2800;color:#fff;" href="javascript:void(0);">Price</a>
+</li>
+<?php
+$filter_list_ASC_query=mysql_query("select * from pic_addpost where pic_category = ".$_REQUEST['cat_id']." ORDER BY pic_price ASC limit 1");
+			
+			$filter_list_DESC_query=mysql_query("select * from pic_addpost where pic_category = ".$_REQUEST['cat_id']." ORDER BY pic_price DESC limit 1");
+			
+			$row_list_ASC = mysql_fetch_object($filter_list_ASC_query);
+			
+		 
+			
+			$row_list_DESC = mysql_fetch_object($filter_list_DESC_query);
+			
+			$row_list_DESC ->pic_price;
+			
+			$total = ($row_list_DESC->pic_price- $row_list_ASC->pic_price)/3;
+			
+			$total = $row_list_ASC+$total;
+			
+			
+			$no = mysql_num_rows($filter_list_ASC_query);
+			
+			
+			 ?>
+<ul>
+<div style="overflow: auto; overflow-x: hidden; height:125px;" id="price" class="list-group">
+<li>
+  <div style="padding: 5px;" align="center">
+  <input type="text" name="from_price" id="from_price" placeholder="Price From.." value="<?php if(isset($_POST['from_price'])){ echo $_POST['from_price']; } ?>" >
+  </div>
+   <div style="padding: 5px;" align="center">- To - </div>
+   <div style="padding: 5px;" align="center">
+  <input type="text" name="to_price" id="to_price" placeholder="Price To.." value="<?php if(isset($_POST['to_price'])){ echo $_POST['to_price']; } ?>" >
+  </div>
+  <div align="center">
+   <input   type="button" style="width:30%;" onClick="Javascript:filterPrice();" name="go_price" id="go_price" Value="Go!">
+   </div>
+ 
+</li>
+</div>
+			
+</ul>	
+</ul>
+<ul  id="myList" >
+<li>
+	
+   		<?php
+			$filter_query=mysql_query("select DISTINCT addpost_fields_title,addpost_fields_type from pic_addpost_field where addpost_fields_categories_id = ".$_REQUEST['cat_id']."");
+			$no=0;
+			while($row = mysql_fetch_object($filter_query)){
+			
+    		?>
+    		
+    		<ul class="topnav">	
+	<li>
+	
+	<?php $nametitle = preg_replace('/\s+/', '', $row->addpost_fields_title); ?>
+	<a style="background:#6a2800;color:#fff;" href="javascript:void(0);"><?php echo $row->addpost_fields_title; ?></a>
+		<ul <?php if(isset($_POST[$nametitle])){ ?> style="display:block;" <?php } else { ?>style="display:none;" <?php } ?>>
+			
+			
+			<?php
+			 if($no<10 && $row->addpost_fields_type!="Numeric"){
+			?>
+			
+			<input class="form-control" id="<?php echo $nametitle ; ?>input" type="search" placeholder="Search..."  style="width:100%; " />
+			
+			<div style="overflow: auto; overflow-x: hidden; height:90px;" id="<?php echo $nametitle ; ?>" class="list-group">
+			
+			 <?php
+			}
+			else{
+						
+		?>
+		
+			
+			<div>
+		
+		<?php
+		}
+		?>
+		<?php
+			 
+			if($row->addpost_fields_type!="Numeric"){
+			$filter_list_query=mysql_query("select DISTINCT addpost_fields_value,addpost_fields_title from pic_addpost_field where addpost_fields_categories_id = ".$_REQUEST['cat_id']." and addpost_fields_title = '".$row->addpost_fields_title."' ");
+			
+			$no = mysql_num_rows($filter_list_query);
+			
+			while($row_list = mysql_fetch_object($filter_list_query)){
+			$name = preg_replace('/\s+/', '', $row_list->addpost_fields_value);
+			//echo $_POST[$name];
+			 if($no<10){
+			 ?>
+			 
+			<div><a class="list-group-item" href="#"><input <?php if(isset($_POST[$name]) and $_POST[$name]==$row_list->addpost_fields_value){ ?> checked <?php } else { } ?> id="<?php echo $row->addpost_fields_title;?>" name="<?php echo $name;?>" value="<?php echo $row_list->addpost_fields_value;?>" type="checkbox" onchange="javascript:filterProducts();" style="float:left;"><div style="padding:5px; padding-left: 25px;"><?php echo $row_list->addpost_fields_value;?></div></a></div>
+			
+			
+			
+             
+			 <?php
+			 }
+			 else{
+			 ?>
+			 <a href="#"><input <?php if(isset($_POST[$name]) and $_POST[$name]==$row_list->addpost_fields_value){ ?> checked <?php } else { } ?> id="<?php echo $row->addpost_fields_title;?>" name="<?php echo $name;?>" value="<?php echo $row_list->addpost_fields_value;?>" type="checkbox" onchange="javascript:filterProducts();"><span><?php echo $row_list->addpost_fields_value;?></span></a>
+			 <?php
+			 }
+			 }
+			 }
+			 else{ 
+			 
+			 ?>
+			 <div style="overflow: auto; overflow-x: hidden; height:125px;" id="price" class="list-group">
+
+  <div style="padding: 5px;" align="center">
+  <input type="text" name="<?php echo $nametitle."1"; ?>" id="<?php echo $nametitle."1"; ?>" placeholder="<?php echo $nametitle; ?> From.." value="<?php if(isset($_POST[$nametitle."1"])){ echo $_POST[$nametitle."1"]; } ?>" >
+  </div>
+   <div style="padding: 5px;" align="center">- To - </div>
+   <div style="padding: 5px;" align="center">
+  <input type="text" name="<?php echo $nametitle."2"; ?>" id="<?php echo $nametitle."2"; ?>" placeholder="<?php echo $nametitle; ?> To.." value="<?php if(isset($_POST[$nametitle."2"])){ echo $_POST[$nametitle."2"]; } ?>" >
+  </div>
+  <div align="center">
+   <input   type="button" style="width:30%;" onClick="javascript:filterProducts();" name="go_price" id="go_price" Value="Go!">
+   </div>
+ 
+
+</div>
+			 <?php
+			 }
+			 ?>
+			 </div>
+			
+		</ul>
+	</li>
+	
+	
+</ul>
+
+
+
+
+
+<script type="text/javascript">
+
+$('#<?php echo $nametitle ?>').btsListFilter('#<?php echo $nametitle ?>input', {itemChild: 'div'});
+
+</script>
+<script src="/labs-common.js"></script>
+
+<?php
+}
+?>
+</li>
+</ul>
+<ul class="topnav" id="loadMore">
+<li>
+  <div align="center"><a href="javascript:void(0);">Show More</a>
+  </div>
+</li>
+
+  </ul>
+<ul class="topnav" id="showLess">
+<li>
+  <div align="center"><a href="javascript:void(0);">Show Less</a>
+  </div>
+</li>
+
+  </ul>
+  
+  
+     </form>
+        </div>
+        
+      
+	  
+      <?php
+	  }
+	  
+	  public function filter(){
+	  
+	  ?>
+	          <div class="rows">
+	<div class="container">
+    <div class="bor">
+    	<?php
+		$this->leftMenu();
+		?>
+		
+	          <div class="categories-right">     
+      
+      <div class="filter">
+      <div class="filter-list">
+            	<ul>
+      <?php
+      $filtered_value_query = mysql_query("select DISTINCT addpost_fields_value,addpost_fields_title from pic_addpost_field where addpost_fields_categories_id=".$_POST['cat_id']."");
+     
+      $str_num="";
+      $str="";
+      $str_cat=addpost_fields_categories_id."=".$_POST['cat_id'];
+      
+      $i=1;
+	  while($row = mysql_fetch_object($filtered_value_query)){
+     
+     $addpost_fields_title = preg_replace('/\s+/', '', $row->addpost_fields_value);
+	 $addpost_fields_title_head = preg_replace('/\s+/', '', $row->addpost_fields_title);
+     
+      if(isset($_POST[$addpost_fields_title]) and $_POST[$addpost_fields_title]==$row->addpost_fields_value){ 
+      
+	  if($i==1){ $str.=" or "; } else { $str.=" or "; }
+	  $str.=" (".addpost_fields_value."='".$row->addpost_fields_value."' and "; 
+	  $str.=addpost_fields_title."='".$row->addpost_fields_title."') "; 
+	  
+      ?>
+      <li><a href="#"><?php echo $row->addpost_fields_value; ?></a></li>
+      <?php
+     
+	  }
+	  
+	  else{
+	  
+	   if(isset($_POST[$addpost_fields_title_head."1"]) and isset($_POST[$addpost_fields_title_head."2"]) and $_POST[$addpost_fields_title_head."1"]!="" and $_POST[$addpost_fields_title_head."2"]!="" and $_POST[$addpost_fields_title_head."1"]!=0 and $_POST[$addpost_fields_title_head."2"]!=0){
+      
+      $str_num.=" and addpost_fields_value BETWEEN ".$_POST[$addpost_fields_title_head."1"]." AND ".$_POST[$addpost_fields_title_head."2"]."";
+      
+      ?>
+      <li><a href="#"><?php echo $_POST[$addpost_fields_title_head."1"]; ?> - <?php echo $_POST[$addpost_fields_title_head."2"]; ?></a></li>
+      <?php
+      
+      }
+      else {
+      
+       $str_num.="";
+      
+      }
+	  
+	 $i++;  
+	  }
+	  
+	  
+      
+      
+	  }
+      
+      //echo $str_cat.$str_num.$str;
+      
+      $filtered_criteria_query = mysql_query("select DISTINCT addpost_uni_id from pic_addpost_field WHERE ".$str_cat."".$str_num."".$str." order by `addpost_field_id` DESC ");
+      //$ree = mysql_fetch_array($filtered_criteria_query);
+	  //echo $str;
+      //print_r($ree);
+      ?>
+        	
+                    
+                    
+                </ul>
+            </div>
+            
+            <div class="space_10"></div>
+            <?php echo $this->sorting(); ?>
+        </div>
+        
+        <div class="rows">
+        <?php
+		 if(isset($_SESSION['pic']['biscuit']['city'])){ $city = $_SESSION['pic']['biscuit']['city'];}
+		  else{ $city = ""; }
+		?>
+        
+         <?php
+		
+		while($row =  mysql_fetch_object($filtered_criteria_query)) {
+		?>
+        	
+           <?php
+           if(isset($_POST['from_price']) and isset($_POST['to_price']) and $_POST['to_price']!="" and $_POST['from_price']!="" and $_POST['to_price']!=0 and $_POST['from_price']!=0){
+      
+      $str_price=" and pic_price BETWEEN ".$_POST['from_price']." AND ".$_POST['to_price']."";
+      
+      }
+      else {
+      
+       $str_price="";
+      
+      }
+          // $query_ads_fields = mysql_query("select * from pic_addpost_field where addpost_fields_categories_id=".$_REQUEST['cat_id']." and addpost_fields_title='' and addpost_fields_value=''");
+		   $query_ads = mysql_query("select * from pic_addpost where pic_post_city='".$city."' and  pic_category=".$_REQUEST['cat_id']." and pic_ads_id='".$row->addpost_uni_id."'".$str_price." ");
+		   $row_ads = mysql_fetch_object($query_ads);
+		   
+		   $no_product = mysql_num_rows($query_ads );
+		   
+		   if($no_product==1){
+		   ?>
+		   
+           
+           <a href="index.php?action=view&module=product_detail&ads_id=<?php echo $row->addpost_uni_id; ?>">
+           
+           <div class="list-view">
+            	<div class="list-view-img">
+                <?php
+				$query_img = mysql_query("select * from pic_addpost_images where addpost_id='$row->addpost_uni_id' order by ad_image_id ASC limit 1");
+				$row_img = mysql_fetch_object($query_img);
+				
+				?>
+                <img src="media/small/<?php echo $row_img->ad_image_url; ?>"> 
+                </div>
+                <div class="list-view-cont">
+                	<div class="list-title"><?php echo $row_ads->pic_title; ?></div>
+                    <p><?php echo $row_ads->pic_discription; ?></p>
+                    <b><?php echo $row_ads->pic_add_taluk." , ".$row_ads->pic_post_city." District"; ?></b>
+                    
+                    <div class="recent-time"><?php echo $row_ads->pic_postdate; ?></div>
+                </div>
+                <div class="list-view-amt">
+                	<b><i><img src="css/images/inr_symbol.png" /></i><?php echo $row_ads->pic_price; ?></b>
+                </div>
+            </div>
+            
+        	
+            </a>
+            <?php } ?>
+            
+            <?php
+			}
+			?>
+            
+             <?php
+		$filtered_criteria_query2 = mysql_query("select DISTINCT addpost_uni_id from pic_addpost_field WHERE ".$str_cat."".$str_num."".$str." order by `addpost_field_id` DESC");
+		while($row =  mysql_fetch_object($filtered_criteria_query2)) {
+		?>
+        	
+
+           <?php
+           if(isset($_POST['from_price']) and isset($_POST['to_price']) and $_POST['to_price']!="" and $_POST['from_price']!="" and $_POST['to_price']!=0 and $_POST['from_price']!=0){
+      
+      $str_price=" and pic_price BETWEEN ".$_POST['from_price']." AND ".$_POST['to_price']."";
+      
+      }
+      else {
+      
+       $str_price="";
+      
+      }
+          // $query_ads_fields = mysql_query("select * from pic_addpost_field where addpost_fields_categories_id=".$_REQUEST['cat_id']." and addpost_fields_title='' and addpost_fields_value=''");
+		 		  
+		   $query_ads = mysql_query("select * from pic_addpost where pic_post_city!='".$city."' and  pic_category=".$_REQUEST['cat_id']." and pic_ads_id='".$row->addpost_uni_id."'".$str_price." ");
+		   $row_ads = mysql_fetch_object($query_ads);
+		   
+		   $no_product = mysql_num_rows($query_ads );
+		   
+		   if($no_product==1){
+		   ?>
+		   
+           
+           <a href="index.php?action=view&module=product_detail&ads_id=<?php echo $row->addpost_uni_id; ?>">
+           
+           <div class="list-view">
+            	<div class="list-view-img">
+                <?php
+				$query_img = mysql_query("select * from pic_addpost_images where addpost_id='$row->addpost_uni_id' order by ad_image_id ASC limit 1");
+				$row_img = mysql_fetch_object($query_img);
+				
+				?>
+                <img src="media/small/<?php echo $row_img->ad_image_url; ?>"> 
+                </div>
+                <div class="list-view-cont">
+                	<div class="list-title"><?php echo $row_ads->pic_title; ?></div>
+                    <p><?php echo $row_ads->pic_discription; ?></p>
+                   <b><?php echo $row_ads->pic_add_taluk." , ".$row_ads->pic_post_city." District"; ?></b>
+                    
+                    <div class="recent-time"><?php echo $row_ads->pic_postdate; ?></div>
+                </div>
+                <div class="list-view-amt">
+                	<b><i><img src="css/images/inr_symbol.png" /></i><?php echo $row_ads->pic_price; ?></b>
+                </div>
+            </div>
+            
+        	
+            </a>
+            <?php } ?>
+            
+            <?php
+			}
+			?>
+            
+
+            
+            
+        </div>
+        
+        <div class="space_20"></div>
+        
+        <div class="page-nav">
+        	<ul>
+            	<li><a href="#">4</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">2</a></li>
+                <li><a class="active-1" href="#">1</a></li>
+            </ul>
+        </div>       
+            
+        </div>
+         </div>
+          </div>
+           </div>
+	  
+	  <?php
+	  
+	  }
+	  
+	  public function sorting(){
+	  ?>
+	  <div class="rows" align="right">
+           	  <form name="sort_form" id="sort_form">
+            	  <select name="sorting" size="1" id="sorting" onChange="MM_jumpMenu('parent',this,0)">
+            	    <option value="0">Price Sorting</option>
+            	    <option value="1">Low to High</option>
+            	    <option value="2">High to Low</option>
+                   </select>
+                </form>
+            </div>
+	  
+	  <?php
+		
+	  
+	  }
+
+}
+?>

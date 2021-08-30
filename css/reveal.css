@@ -1,0 +1,126 @@
+/*	--------------------------------------------------
+	Reveal Modals
+	-------------------------------------------------- */
+		
+	.reveal-modal-bg { 
+		position: fixed; 
+		height: 100%;
+		width: 100%;
+		background: #000;
+		background: rgba(0,0,0,0.8);
+		z-index: 100003;
+		display: none;
+		top: 0;
+		left: 0; 
+		}
+	
+	.reveal-modal {
+		visibility: hidden;
+		top:100px; 
+		left: 28%;		
+		width: 600px;		
+		position: absolute;
+		z-index: 100004;
+		padding: 30px;
+		background:#fff;	
+		}		
+	
+	
+	.reveal-modal .close-reveal-modal {
+		font-size: 22px;
+		line-height: .5;
+		position: absolute;
+		top: 8px;
+		right: 8px;
+		padding:5px;
+		color: #aaa;
+		text-shadow: 0 -1px 1px rbga(0,0,0,.6);
+		cursor: pointer;
+		border:1px solid #aaa;
+		} 
+		
+	.enter{
+		width:100%;
+		float:left;
+		text-align:center;
+		font-size:18px;
+		font-weight:bold;
+	}
+	
+	.enter-sub{
+		width:100%;
+		float:left;
+		text-align:center;
+		color:#999;
+		margin:10px 0;
+	}
+	
+	.dotted{
+		width:100%;
+		float:left;
+		border-bottom:1px dotted #ccc;
+	}
+	
+	.lable{
+		width:175px;
+		float:left;
+		font-size:15px;
+		font-weight:bold;
+		text-align:right;
+		margin-top:3px;
+	}
+	
+	.text-box{
+		width:330px;
+		float:right;
+	}
+	
+	.con{
+		width:100px;
+		margin:0px auto;
+	}
+	
+	.confirm{
+		width:100px;
+		height:30px;
+		float:left;
+		border:0;
+		background:#F2C716;
+		color:#fff;
+		cursor:pointer;
+	}
+	
+	.pop-list{
+		width:100%;
+		float:left;
+	}
+	
+	.pop-list ul{
+		margin:0px;
+		padding:0px;
+	}
+	
+	.pop-list li{
+		width:100%;
+		float:left;
+		line-height:24px;
+		list-style:none;
+		background:
+	}
+	@media screen and (max-width: 768px) {
+	.reveal-modal-bg{
+		
+	}
+	.reveal-modal{
+		left: 0%;
+		width: 67%;
+		margin: 0% 10%;
+	}
+	.lable{
+	width:auto;
+	}
+	.text-box{
+	width:auto;
+	}
+	
+	}
