@@ -23,6 +23,7 @@ class product_detail extends config
                         <div class="row d-flex justify-content-center p-4 text-center">
                             <h5>You Requested Already!<br />Thank you for Contacting us!.</h5>
                         </div>
+                        
 
                         <div class="row d-flex justify-content-center">
                             <h6 class="text-muted">We will Call you soon.</h6>
@@ -51,7 +52,7 @@ class product_detail extends config
 
                     </div>
 
-                    <div class="modal-body" id="dynamicform">
+                    <div class="modal-body" id="dynamicformlike">
 
 
 
@@ -213,6 +214,36 @@ class product_detail extends config
 
                 </div>
 			<div class="p-2 bd-highlight" style="font-weight: bold"><?php echo $this->categoryName($pic_category) ?></div>
+
+            <div class="p-2 bd-highlight" style="font-weight: bold; ">
+
+               <?php
+                $userid1 = $_SESSION['pic']['biscuit']['userid'];
+                $queryuser1 = mysqli_query($this->mysqlConfig(), "SELECT * FROM `pic_user` where user_id = $userid1 limit 1");
+                $rowuser1 = mysqli_fetch_object($queryuser1);
+                $module = "product_detail";
+
+                $like_query = mysqli_query($this->mysqlConfig(), "SELECT * FROM  `pic_likes` where likes_product_id='$ads_id' and likes_cus_id=" . $_SESSION['pic']['biscuit']['userid'] . "");
+                $like_no = mysqli_num_rows($like_query);
+
+                if ($like_no == 0) {
+                    $modal = "like";
+                } else {
+                    $modal = "liked";
+                }
+               ?>
+
+               
+            
+               <a href="#<?php echo $modal; ?>" data-toggle="modal" ads_id="<?php echo $_REQUEST['ads_id']; ?>"  ads_uid="<?php echo $_REQUEST['ads_uid']; ?>"   user_name="<?php echo $rowuser1->user_username; ?>" user_mob="<?php echo $rowuser1->user_mobile; ?>" user_email="<?php echo $rowuser1->user_email; ?>" module="<?php echo $module; ?>" class="like1 btn btn-white btn-block like">Like <?php if ($modal == "liked") { ?>
+									<i class="text-success fa fa-check-circle"></i>
+								<?php } ?></a>
+           
+            
+               
+           
+           
+            </div>
 
                 <div class="col-sm-12 col-md-12 col-lg-12 pt-5">
                     <div class="row p-2" style="border: 1px solid #dee2e6;">
@@ -495,8 +526,8 @@ class product_detail extends config
                                 </script>
 
 
-                                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgz9gQANhwRBhu6oPIuO1LPd6KcMUDoKo&callback=initMap">
-                                </script>
+                                <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgz9gQANhwRBhu6oPIuO1LPd6KcMUDoKo&callback=initMap">
+                                </script>-->
 
 
                             </div>
@@ -577,3 +608,29 @@ PIC Team";
     }
 }
 ?>
+<script src="dist/js/jquery-3.4.1.min.js"></script>
+		<script src="dist/js/popper.min.js"></script>
+<script>
+			$('.like').click(function() { alert("ssss");
+
+				var ads_id = $(this).attr('ads_id');
+				var ads_uid = $(this).attr('ads_uid');
+				var user_name = $(this).attr('user_name');
+				var user_mob = $(this).attr('user_mob');
+				var user_email = $(this).attr('user_email');
+				var moduleview = $(this).attr('module');
+
+
+				$.ajax({
+					url: "index.php?module=misc&action=helper&post=likeForm&ads_id=" + ads_id + "&ads_uid=" + ads_uid + "&user_name=" + user_name + "&user_mob=" + user_mob + "&user_email=" + user_email + "&moduleview=" + moduleview,
+					cache: false,
+					success: function(result) {
+                        alert(result);
+						//$("#dynamicform").html(result);
+                        $("#dynamicformlike").html(result);
+					}
+				});
+			});
+
+            
+		</script>
