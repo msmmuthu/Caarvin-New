@@ -1351,7 +1351,19 @@ class products extends config
 		}
 
 	?>
+
+		<?php
+        if ($like_no == 1) { ?> 
 		<a href="#<?php echo $modal; ?>" data-toggle="modal" ads_id="<?php echo $adid; ?>" ads_uid="<?php echo $adsuserid; ?>" user_name="<?php echo $rowuser->user_username; ?>" user_mob="<?php echo $rowuser->user_mobile; ?>" user_email="<?php echo $rowuser->user_email; ?>" module="<?php echo $module; ?>" class="<?php echo $modal; ?> btn btn-white btn-block">
+		<?php } else { ?>
+		<a href="index.php?action=view&module=product_detail&ads_id=<?php echo $adid; ?>&ads_uid=<?php echo $adsuserid; ?>"  class="<?php echo $modal; ?> btn btn-white btn-block">	
+		<?php } ?>
+
+
+
+
+
+		<!--<a href="#<?php echo $modal; ?>" data-toggle="modal" ads_id="<?php echo $adid; ?>" ads_uid="<?php echo $adsuserid; ?>" user_name="<?php echo $rowuser->user_username; ?>" user_mob="<?php echo $rowuser->user_mobile; ?>" user_email="<?php echo $rowuser->user_email; ?>" module="<?php echo $module; ?>" class="<?php echo $modal; ?> btn btn-white btn-block">-->
 			<div class="card mb-3">
 				<div class="row no-gutters">
 					<div class="col-md-4">
