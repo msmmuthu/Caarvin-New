@@ -284,7 +284,7 @@ $areYou=$areYous;
 				}
 				// File upload End
 		
-                $query = mysqli_query($this->mysqlConfig(),"INSERT INTO `pic_user`( `user_username`, `user_password`, `user_email`, `user_mobile`, `user_city`, `user_type`, `user_status`, `user_taluk`, `user_town`, `user_lan`, `user_lon`,`user_refer`, `email_val`,`mobile_val`,`user_id_unique`, `user_document`) VALUES ('$name','$pw','$id','$mobile','$city','$areYou','0','$taluk_select','$town','$lan','$lon','$refer1','$shuffled_email','$shuffled_mobile','$userid', '$fileName')");
+                mysqli_query($this->mysqlConfig(),"INSERT INTO `pic_user`( `user_username`, `user_password`, `user_email`, `user_mobile`, `user_city`, `user_type`, `user_status`, `user_taluk`, `user_town`, `user_lan`, `user_lon`,`user_refer`, `email_val`,`mobile_val`,`user_id_unique`, `user_document`) VALUES ('$name','$pw','$id','$mobile','$city','$areYou','0','$taluk_select','$town','$lan','$lon','$refer1','$shuffled_email','$shuffled_mobile','$userid', '$fileName')");
 			        
 
 
