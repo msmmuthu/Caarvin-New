@@ -680,7 +680,7 @@ public function index() {
 				</div>
                     
 				<div class="col-sm-12 col-md-12 col-lg-9">
-                                    <form  id="myacctform" name="myacctform" method="post" action="index.php" onSubmit="return myacct_validate();" >
+                                    <form  id="myacctform" name="myacctform" method="post" action="index.php" onSubmit="return myacct_validate();" enctype="multipart/form-data">
                                     <div class="row pt-4">
                     <div class="col-sm-10 col-md-10 col-lg-10 pb-0">
                     <h4>My Account Details</h4>
@@ -923,7 +923,71 @@ figure figcaption {
    
     
 
-                
+   <div class="form-group">
+
+   <input type="hidden" name="hdnUserDocument" id="hdnUserDocument" value="<?php echo ($myact_fetch['user_document']) ? $myact_fetch['user_document'] : ""; ?>">
+
+
+  <style>
+  .img-thumbnail {
+  max-width: 150px;
+  }
+  </style>
+  <script type="text/javascript">
+    function checkFileUpload(fileId) {
+      var browseFileId = document.getElementById(fileId);
+      var fileUploadTxtId = document.getElementById('fileUploadTxt');
+      var fileUploadErrHolderId = document.getElementById('fileUploadErrHolderId');
+      if (browseFileId.files.length === 0) {
+      return;
+    }
+    console.log(browseFileId.files[0]);
+    var fileInfo = browseFileId.files[0];
+    var fileType = fileInfo.type;
+    if (fileType.indexOf('word') >= 0 || fileType.indexOf('pdf') >= 0) {
+      fileUploadErrHolderId.style.display = 'none';
+      fileUploadTxtId.innerHTML = fileInfo.name;
+    } else {
+      browseFileId.value = '';
+      fileUploadErrHolderId.style.display = 'block';
+      fileUploadTxtId.innerHTML = 'Upload File *';
+    }
+  }
+  </script>
+
+  <label class="mylabel" for="city_header_profile">Upload Document *</label>
+  <div class="editroute btn btn-light btn-block" style="position:relative;">
+      <input id="fileUploadId" type="file" name="fileUpload[]" class="fileUploadCls" onchange="checkFileUpload('fileUploadId')" value="" />
+      <span><i class="fa fa-upload"></i> <span id="fileUploadTxt">Upload </span></span>
+  </div>
+  <div id="fileUploadErrHolderId" class="form-group">
+      <div class="fileUploadErrMsgCls">Permitted file types : pdf, doc, docx</div>
+  </div>
+
+
+  <?php
+
+                        if($myact_fetch['user_document']!=''){
+                       
+                          $file_name = 'media/uploadfiles/'.$myact_fetch['user_document'];
+                       
+                        ?>
+
+
+                            <div class="form-group">
+                            <div class="hint">
+                            <a target="_blank" href="<?php echo BASE_URL . 'media/uploadfiles/'. $myact_fetch['user_document']; ?>">
+                                Download
+                            </a>
+                            </div>
+                            </div>
+                            
+                            
+                            
+                        <?php } ?>
+
+
+    </div>    
 
 
 <!--
@@ -1078,9 +1142,36 @@ else{
                             <?php echo $myact_fetch['user_town'].", ".$myact_fetch['user_taluk'].", ".$myact_fetch['user_city']; ?>
                             </div>
                             </div>
+
+                            
                             
                             
                         </div>
+
+                        <?php
+
+                        if($myact_fetch['user_document']!=''){
+                       
+                          $file_name = 'media/uploadfiles/'.$myact_fetch['user_document'];
+                       
+                        ?>
+
+                        <input type="hidden" name="hdnUserDocument" id="hdnUserDocument" value="<?php echo ($myact_fetch['user_document']) ? $myact_fetch['user_document'] : ""; ?>">
+
+                        <div class="col-sm-12 col-md-12 col-lg-3">
+                            <div class="form-group">
+                            <label class="mylabel" for="file download"><i class="fas fa-camera fa-xs"></i> File Download</label>
+                            <div class="hint">
+                            <a target="_blank" href="<?php echo BASE_URL . 'media/uploadfiles/'. $myact_fetch['user_document']; ?>">
+                                Download
+                            </a>
+                            </div>
+                            </div>
+                            
+                            
+                            
+                        </div>
+                        <?php } ?>
                         
                     </div>
                         

@@ -1380,9 +1380,9 @@ class products extends config
 						$row_nm = mysqli_num_rows($query_img);
 						if ($row_nm == 1) {
 						?>
-							<!-- <img class="card-img" src="media/thumnails/<?php echo $row_img->ad_image_url; ?>"> -->
+							 <img class="card-img" src="media/thumnails/<?php echo $row_img->ad_image_url; ?>" width="200px" height="240px"> 
 						<?php } else { ?>
-							<!-- <img class="card-img" src="css/images/no_images.jpg"> -->
+							<img class="card-img" src="css/images/no_images.jpg" width="200px" height="240px"> 
 						<?php } ?>
 
 					</div>

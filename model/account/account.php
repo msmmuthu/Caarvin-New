@@ -264,9 +264,32 @@ $areYou=$areYous;
 				
 				$validate_mobile = "PIC".time()."ADS";
 				$shuffled_mobile = str_shuffle($validate_mobile);
+
+
+				
+				// File Upload start
+				$fileName = '';
+				if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['fileUpload'])) {
+					$fileDirPath = 'media/uploadfiles';
+					if (!file_exists($fileDirPath)) {
+						mkdir($fileDirPath, 0777, true);
+					}
+					$fileUploadArr = $_FILES['fileUpload'];
+					$fileExt = substr(strrchr($fileUploadArr['name'][0], '.'), 1);
+					$fileDirName = $fileDirPath . '/' . time() . '.' . $fileExt;
+					$fileName = time() . '.' . $fileExt;
+					if (move_uploaded_file($fileUploadArr['tmp_name'][0], $fileDirName)) {
+						
+					}
+				}
+				// File upload End
 		
-                                mysqli_query($this->mysqlConfig(),"INSERT INTO `pic_user`( `user_username`, `user_password`, `user_email`, `user_mobile`, `user_city`, `user_type`, `user_status`, `user_taluk`, `user_town`, `user_lan`, `user_lon`,`user_refer`, `email_val`,`mobile_val`,`user_id_unique`) VALUES ('$name','$pw','$id','$mobile','$city','$areYou','0','$taluk_select','$town','$lan','$lon','$refer1','$shuffled_email','$shuffled_mobile','$userid')");
+                mysqli_query($this->mysqlConfig(),"INSERT INTO `pic_user`( `user_username`, `user_password`, `user_email`, `user_mobile`, `user_city`, `user_type`, `user_status`, `user_taluk`, `user_town`, `user_lan`, `user_lon`,`user_refer`, `email_val`,`mobile_val`,`user_id_unique`, `user_document`) VALUES ('$name','$pw','$id','$mobile','$city','$areYou','0','$taluk_select','$town','$lan','$lon','$refer1','$shuffled_email','$shuffled_mobile','$userid', '$fileName')");
 			        
+
+
+
+
 			        require("helper/mailing/mailing.php");
 			        $mailing= new mailing();
 			        $sub = "Abocarz - Account Created";

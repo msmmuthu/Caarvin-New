@@ -237,8 +237,31 @@ mysqli_query($this->mysqlConfig(),"UPDATE  `pic_user` SET  `user_password`='$pas
 
 }
 else{
+  
 
-mysqli_query($this->mysqlConfig(),"UPDATE  `pic_user` SET  `user_password`='$pass',`user_lon`='".$lon."',`user_lan`='".$lan."',`user_city`='".$_POST['city_header_profile_man']."',`user_taluk`='".$_POST['taluk_select']."',`user_town`='".$_POST['townregman']."',`user_sex`='".$_POST['Sex']."',`user_username`='".$_POST['name']."',`user_dob`='".$dob."' WHERE  `pic_user`.`user_id`=".$_SESSION['pic']['biscuit']['userid']." and `pic_user`.`user_password` ='".$_POST['pass']."'");
+// File Upload start
+$fileName = (isset($_POST['hdnUserDocument']) ? $_POST['hdnUserDocument'] : '');
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['fileUpload'])) {
+  $fileDirPath = 'media/uploadfiles';
+  if (!file_exists($fileDirPath)) {
+    mkdir($fileDirPath, 0777, true);
+  }
+  $fileUploadArr = $_FILES['fileUpload'];
+  $fileExt = substr(strrchr($fileUploadArr['name'][0], '.'), 1);
+  $fileDirName = $fileDirPath . '/' . time() . '.' . $fileExt;
+  $fileName = time() . '.' . $fileExt;
+  if (move_uploaded_file($fileUploadArr['tmp_name'][0], $fileDirName)) {
+    
+  }
+
+  if (isset($_POST['hdnUserDocument']) && $_POST['hdnUserDocument'] != '') {
+    unlink($fileDirPath.'/'.$_POST['hdnUserDocument']);
+  }
+
+}
+// File upload End
+
+mysqli_query($this->mysqlConfig(),"UPDATE  `pic_user` SET  `user_password`='$pass',`user_lon`='".$lon."',`user_lan`='".$lan."',`user_city`='".$_POST['city_header_profile_man']."',`user_taluk`='".$_POST['taluk_select']."',`user_town`='".$_POST['townregman']."',`user_sex`='".$_POST['Sex']."',`user_username`='".$_POST['name']."',`user_dob`='".$dob."', `user_document`='".$fileName."' WHERE  `pic_user`.`user_id`=".$_SESSION['pic']['biscuit']['userid']." and `pic_user`.`user_password` ='".$_POST['pass']."'");
 
 
 }
