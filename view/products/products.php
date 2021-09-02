@@ -2,7 +2,6 @@
 
 class products extends config
 {
-
 	public function headerscript()
 	{
 ?>
