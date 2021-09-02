@@ -225,7 +225,7 @@ $('#example_add_history').DataTable({
                     
 				<div class="col-sm-12 col-md-12 col-lg-9">
 
-                        <form  id="registerform" name="registerform" method="post" action="" onSubmit="return register_validate();" >
+                        <form  id="registerform" name="registerform" method="post"  onSubmit="return register_validate();" enctype="multipart/form-data">
                             <input type="hidden" name="action" value="model" />
                             <input type="hidden" name="module" value="add_history" />
                             <input type="hidden" name="post" value="addhistory details" />
@@ -302,7 +302,7 @@ $myact_fetch = mysqli_fetch_array($myact_query);
 	if($myact_fetch['privacy_register']==1){
 	?>
     
-                        <form  id="registerform" name="registerform" method="post" action="" onSubmit="return register_validate();" >
+                        <form  id="registerform" name="registerform" method="post" action="" onSubmit="return register_validate();"  enctype="multipart/form-data">
                             <div class="row pt-4">
                     <div class="col-sm-10 col-md-10 col-lg-10 pb-0">
                     <h4>Register Now!</h4>
@@ -453,6 +453,45 @@ $myact_fetch = mysqli_fetch_array($myact_query);
             display:none;
         }
     </style>
+
+
+<style>
+                                .img-thumbnail {
+                                    max-width: 150px;
+                                }
+                            </style>
+                            <script type="text/javascript">
+                                function checkFileUpload(fileId) {
+                                    var browseFileId = document.getElementById(fileId);
+                                    var fileUploadTxtId = document.getElementById('fileUploadTxt');
+                                    var fileUploadErrHolderId = document.getElementById('fileUploadErrHolderId');
+                                    if (browseFileId.files.length === 0) {
+                                        return;
+                                    }
+                                    console.log(browseFileId.files[0]);
+                                    var fileInfo = browseFileId.files[0];
+                                    var fileType = fileInfo.type;
+                                    if (fileType.indexOf('word') >= 0 || fileType.indexOf('pdf') >= 0) {
+                                        fileUploadErrHolderId.style.display = 'none';
+                                        fileUploadTxtId.innerHTML = fileInfo.name;
+                                    } else {
+                                        browseFileId.value = '';
+                                        fileUploadErrHolderId.style.display = 'block';
+                                        fileUploadTxtId.innerHTML = 'Upload File *';
+                                    }
+                                }
+                            </script>
+
+<div class="form-group">
+<label class="mylabel" for="city_header_profile">Upload Files *</label>
+                                <div class="editroute btn btn-light btn-block" style="position:relative;">
+                                    <input id="fileUploadId" required type="file" name="fileUpload[]" class="fileUploadCls" onchange="checkFileUpload('fileUploadId')" value="" />
+                                    <span><i class="fa fa-upload"></i> <span id="fileUploadTxt">Upload Document</span></span>
+                                </div>
+                                <div id="fileUploadErrHolderId" class="form-group">
+                                    <div class="fileUploadErrMsgCls">Permitted file types : pdf, doc, docx</div>
+                                </div>
+                              </div>
 
 
                         <div class="form-check">
