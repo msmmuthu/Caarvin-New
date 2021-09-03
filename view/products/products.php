@@ -1332,6 +1332,7 @@ class products extends config
 		$userid = $_SESSION['pic']['biscuit']['userid'];
 		$queryuser = mysqli_query($this->mysqlConfig(), "SELECT * FROM `pic_user` where user_id = $userid limit 1");
 		$rowuser = mysqli_fetch_object($queryuser);
+		
 
 
 		$like_query = mysqli_query($this->mysqlConfig(), "SELECT * FROM  `pic_likes` where likes_product_id='$adid' and likes_cus_id=" . $_SESSION['pic']['biscuit']['userid'] . "");
@@ -1347,6 +1348,16 @@ class products extends config
 			$module = "product_detail";
 		} else {
 			$module = "request_detail";
+		}
+
+		$profileUser = mysqli_query($this->mysqlConfig(), "SELECT user_pic FROM `pic_user` where user_id = $adsuserid limit 1");
+		$rowProfileUser = mysqli_fetch_object($profileUser);
+
+		if($rowProfileUser->user_pic==''){
+			$profile_img_url = 'img/avatar.jpg';
+		}
+		else{
+			$profile_img_url = 'media/profile/'.$rowProfileUser->user_pic;
 		}
 
 	?>
@@ -1372,18 +1383,24 @@ class products extends config
 						$multiLocqryExe = mysqli_query($this->mysqlConfig(), $multiLocqry);
 						$multiLocqryCount = mysqli_num_rows($multiLocqryExe);
 
+						
+
 						?>
 
 						<?php
 						$query_img = mysqli_query($this->mysqlConfig(), "select * from pic_addpost_images where addpost_id='$adid' order by ad_image_id ASC limit 1");
 						$row_img = mysqli_fetch_object($query_img);
 						$row_nm = mysqli_num_rows($query_img);
-						if ($row_nm == 1) {
+						//if ($row_nm == 1) {
 						?>
-							 <img class="card-img" src="media/thumnails/<?php echo $row_img->ad_image_url; ?>" width="200px" height="240px"> 
-						<?php } else { ?>
-							<img class="card-img" src="css/images/no_images.jpg" width="200px" height="240px"> 
-						<?php } ?>
+							 <!--<img class="card-img" src="media/thumnails/<?php echo $row_img->ad_image_url; ?>" width="200px" height="240px"> -->
+						<?php // } else { ?>
+							<!--<img class="card-img" src="css/images/no_images.jpg" width="200px" height="240px"> -->
+						<?php // } ?>
+						
+						<div style="padding:3px;"><img class="card-img" src="<?php echo $profile_img_url; ?>" height="230px"  style="width:100%;"></div>
+						
+						
 
 					</div>
 					<div class="col-md-8">

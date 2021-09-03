@@ -335,6 +335,7 @@ public function myLike(){
                           <th><strong>Customer Mobile</strong></th>
                           <th><strong>Customer Email</strong></th>
                           <th><strong>Contact No</strong></th>
+                          <th><strong>View Profile</strong></th>
                        </thead>  
                         </tr>
                         <tbody>
@@ -354,6 +355,8 @@ public function myLike(){
                           <td><?php echo $like_row->likes_cus_mobile; ?></td>
                           <td><?php echo $like_row->likes_cus_email; ?></td>
                           <td><?php echo $like_row->contact_no; ?></td>
+
+                          <td><a title="View Profile" href="index.php?action=view&module=myaccount&post=profile"><i class="fas fa-user-circle"></i></a></td>
                           
                         </tr>
                         <?php
