@@ -274,7 +274,7 @@ mysqli_query($this->mysqlConfig(),"UPDATE  `pic_user` SET  `user_password`='$pas
                 <div class="col-sm-7 col-md-7 col-lg-9 pt-4">
                    
                     <div class="alert alert-success" role="alert">
-                        Profile Updated. Go Back <a href="index.php?action=view&module=myaccount&post=profile" class="alert-link">My Profile</a>.
+                        Profile Updated. Go Back <a href="index.php?action=view&module=myaccount&post=profile" class="alert-link">Profile</a>.
                     </div>
                 </div>
             </div>

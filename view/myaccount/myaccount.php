@@ -980,7 +980,7 @@ figure figcaption {
                             <div class="form-group">
                             <div class="hint">
                             <a target="_blank" href="<?php echo BASE_URL . 'media/uploadfiles/'. $myact_fetch['user_document']; ?>">
-                                Download
+                                Download Document
                             </a>
                             </div>
                             </div>
@@ -1039,7 +1039,7 @@ public function profile() {
 				<div class="col-sm-7 col-md-7 col-lg-9">
                                     <div class="row pt-4">
                     <div class="col-sm-10 col-md-10 col-lg-10 pb-0">
-                    <h4>My Profile</h4>
+                    <h4>Profile</h4>
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2 pb-0">
                         
@@ -1166,7 +1166,7 @@ else{
                             <label class="mylabel" for="file download"><i class="fas fa-camera fa-xs"></i> File Download</label>
                             <div class="hint">
                             <a target="_blank" href="<?php echo BASE_URL . 'media/uploadfiles/'. $myact_fetch['user_document']; ?>">
-                                Download
+                                Download Document
                             </a>
                             </div>
                             </div>

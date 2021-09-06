@@ -1398,7 +1398,7 @@ class products extends config
 							<!--<img class="card-img" src="css/images/no_images.jpg" width="200px" height="240px"> -->
 						<?php // } ?>
 						
-						<div style="padding:3px;"><img class="card-img" src="<?php echo $profile_img_url; ?>" height="230px"  style="width:100%;"></div>
+						<div style="padding:3px;"><img class="card-img" src="<?php echo $profile_img_url; ?>" height="50%"  style="width:50%;"></div>
 						
 						
 

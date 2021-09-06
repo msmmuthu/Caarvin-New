@@ -236,7 +236,7 @@ class product_detail extends config
             
                <a href="#<?php echo $modal; ?>" title="<?php echo $modal; ?>" data-toggle="modal" ads_id="<?php echo $_REQUEST['ads_id']; ?>"  ads_uid="<?php echo $_REQUEST['ads_uid']; ?>"   user_name="<?php echo $rowuser1->user_username; ?>" user_mob="<?php echo $rowuser1->user_mobile; ?>" user_email="<?php echo $rowuser1->user_email; ?>" module="<?php echo $module; ?>" class="like1 like like">
                <?php if ($modal == "liked") { ?>
-                 <i class="fas fa-thumbs-up" style="font-size:24px;color:green;"></i> <?php } else {?>  <i style="font-size:24px" class="fa">&#xf087;</i> <?php } ?> 
+                 <i class="fas fa-thumbs-up" style="font-size:40px;color:green;"></i> <?php } else {?>  <i style="font-size:40px" class="fa">&#xf087;</i> <?php } ?> 
 </a>
                
                </div>
