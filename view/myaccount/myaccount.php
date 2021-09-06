@@ -335,7 +335,7 @@ public function myLike(){
                           <th><strong>Customer Mobile</strong></th>
                           <th><strong>Customer Email</strong></th>
                           <th><strong>Contact No</strong></th>
-                          <th><strong>View Profile</strong></th>
+                          <th><strong>Download Document</strong></th>
                        </thead>  
                         </tr>
                         <tbody>
@@ -348,7 +348,13 @@ public function myLike(){
                            <td><?php
                            $query = mysqli_query($this->mysqlConfig(),"SELECT * FROM  `pic_addpost` WHERE pic_ads_id=".$like_row->likes_product_id." LIMIT 1");
 						   $row = mysqli_fetch_object($query);
-						   echo "dsd".$row->pic_title;
+
+
+               $query_download_doc = mysqli_query($this->mysqlConfig(),"SELECT user_document FROM  `pic_user` WHERE user_id=".$like_row->likes_cus_id." LIMIT 1");
+						   $row_download_doc = mysqli_fetch_object($query_download_doc);
+
+
+						   echo $row->pic_title;
 						   ?>
                            </td>
                            <td><?php echo $like_row->likes_cus_name; ?></td>
@@ -356,7 +362,16 @@ public function myLike(){
                           <td><?php echo $like_row->likes_cus_email; ?></td>
                           <td><?php echo $like_row->contact_no; ?></td>
 
-                          <td><a title="View Profile" href="index.php?action=view&module=myaccount&post=profile"><i class="fas fa-user-circle"></i></a></td>
+                          <td>
+
+                          <?php if ($row_download_doc->user_document != "") { ?> 
+
+                            <a title="Download Document"  target="_blank" href="<?php echo BASE_URL . 'media/uploadfiles/'. $row_download_doc->user_document; ?>">
+                                <i class="fa fa-download"></i>
+                            </a>
+                          
+                          <?php } else { ?> - <?php } ?>
+                          </td>
                           
                         </tr>
                         <?php
