@@ -152,6 +152,15 @@ class product_detail extends config
                 $getFIleQry = mysqli_query($this->mysqlConfig(), "select * from pic_addpost_files where pic_ads_id = {$ads_id}");
                 $getFileArr = mysqli_fetch_object($getFIleQry);
 
+                $profileUser = mysqli_query($this->mysqlConfig(), "SELECT user_pic FROM `pic_user` where user_id = {$_REQUEST['ads_uid']} limit 1");
+                $rowProfileUser = mysqli_fetch_object($profileUser);
+
+                if($rowProfileUser->user_pic==''){
+                    $profile_img_url = 'img/avatar.jpg';
+                }
+                else{
+                    $profile_img_url = 'media/profile/'.$rowProfileUser->user_pic;
+                }
                 ?>
 
                 <div style="display:none;" class="col-sm-12 col-md-12 col-lg-8">
@@ -213,7 +222,13 @@ class product_detail extends config
 
 
                 </div>
-			<div class="p-2 bd-highlight" style="font-weight: bold"><?php echo $this->categoryName($pic_category) ?></div>
+			   <div class="p-2 bd-highlight" style="font-weight: bold"><?php echo $this->categoryName($pic_category) ?></div>
+
+            
+            <div class="col-sm-12 col-md-12 col-lg-12">
+            <div style="padding:3px;height:175px;width:300px;">   
+            <div ><img class="card-img" src="<?php echo $profile_img_url; ?>" height="50%"  style="width:50%;"></div>
+                        </div></div>
 
             <div class="col-sm-12 col-md-12 col-lg-12">
                         <div style="float:right;marigin-right:5px;">
@@ -334,6 +349,7 @@ class product_detail extends config
                             <?php echo $pic_discription; ?>
                         </div>
                     </div>
+                    <?php if ($modal == "liked") { ?>
                     <div class="row  p-2 mt-2" style="border: 1px solid #dee2e6;">
                         <div class="col-sm-12 col-md-12 col-lg-12">
                             <h4>Download File</h4>
@@ -347,7 +363,7 @@ class product_detail extends config
                             </a>
                         </div>
                     </div>
-                    <?php if ($modal == "liked") { ?>
+                    
                     <div class="row  p-2 mt-2" style="border: 1px solid #dee2e6;">
                         <div class="col-sm-12 col-md-12 col-lg-12">
                             <h4>Contact Person</h4>
