@@ -40,7 +40,7 @@ class product_detail extends config{
      //todo
 	 if($ads_type == "product_detail"){
 	 print "<script>";
-     print "window.location.href = 'index.php?action=view&module=product_detail&ads_id=$ads_id'; ";
+     print "window.location.href = 'index.php?action=view&module=product_detail&ads_id=$ads_id&ads_uid=$ads_user_id'; ";
      print "</script>";
 	 }elseif($ads_type == "request_detail") {
 	 print "<script>";
