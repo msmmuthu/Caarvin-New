@@ -142,11 +142,11 @@ class owner extends config{
 		?>
         <script>
 		function loadmore_mobile_layout(){
-		loadmore_search(<?php echo $_REQUEST['p']; ?>,<?php echo $_REQUEST['type']; ?>,"<?php echo $_REQUEST['owner_id']; ?>",<?php echo $_REQUEST['sort']; ?>,<?php echo $_REQUEST['categories_id']; ?>);
+		loadmore_search(<?php echo $_REQUEST['p']; ?>,<?php echo $_REQUEST['type']; ?>,"<?php echo $_REQUEST['owner_id']; ?>",<?php echo $_REQUEST['sort']; ?>);
 		}
 		
 		
-		function loadmore_search(page,type,cat_id,sort,categories_id){
+		function loadmore_search(page,type,cat_id,sort){
 		
 		
 		pages = page+1;
@@ -160,7 +160,6 @@ class owner extends config{
 			'search_pic' : cat_id,
 			'type' : type,
 			'p' : pages,
-			'c' :categories_id,
 			'offset' : offsets,
 			'action' : "view",
 			'module' : "search",
@@ -171,6 +170,7 @@ class owner extends config{
 			
 		var string_id = "#loadmore_rows"+pages;
 		
+		//alert(string_id);
 			
 		$.post("index.php",postdata,function(data){
 			$(string_id).html(data);														  
@@ -394,14 +394,7 @@ echo $adid;
 				$order = "pic_add_lon DESC";
 			}
 		 $dates = date("Y-m-d");
-
-		$query_params = "";	
-		if (isset($_REQUEST['categories_id']) && $_REQUEST['categories_id']!='') {
-			$query_params = " and pic_category=".$_REQUEST['categories_id']."";
-		}
-
-
-		$query_ads = mysqli_query($this->mysqlConfig(),"SELECT * FROM pic_addpost WHERE  addpost_status = 1 ".$query_params." and pic_request=".$_REQUEST['type']." and (pic_user_id = ".$query_search.")  order by $order LIMIT 5 OFFSET ".$_REQUEST['offset']."");
+		$query_ads = mysqli_query($this->mysqlConfig(),"SELECT * FROM pic_addpost WHERE  addpost_status = 1 and pic_request=".$_REQUEST['type']." and (pic_user_id = ".$query_search.")  order by $order LIMIT 5 OFFSET ".$_REQUEST['offset']."");
 		
 		$count_rows = mysqli_num_rows($query_ads);
 		
@@ -457,10 +450,6 @@ echo $adid;
 	 }
 	 
 	  public function list_products_loadmore() {
-
-
-
-		
               $this->headerscript();
 	 ?>
         
@@ -489,14 +478,8 @@ echo $adid;
 			else{
 				$order = "pic_add_lon DESC";
 			}
-
-			$query_params = "";	
-			if (isset($_REQUEST['categories_id']) && $_REQUEST['categories_id']!='') {
-				$query_params = " and pic_category=".$_REQUEST['categories_id']."";
-			}
-
 			
-		$query_ads = mysqli_query($this->mysqlConfig(),"SELECT * FROM pic_addpost WHERE  addpost_status = 1 $query_params  pic_request=".$_REQUEST['type']." and (pic_user_id = ".$query_search.") order by $order LIMIT 5 OFFSET ".$_REQUEST['offset']."");
+		$query_ads = mysqli_query($this->mysqlConfig(),"SELECT * FROM pic_addpost WHERE  addpost_status = 1 and  pic_request=".$_REQUEST['type']." and (pic_user_id = ".$query_search.") order by $order LIMIT 5 OFFSET ".$_REQUEST['offset']."");
 		$count_rows = mysqli_num_rows($query_ads);
 		
 		while($row = mysqli_fetch_object($query_ads)) {
@@ -855,12 +838,9 @@ echo $adid;
 				$order = "pic_add_lon DESC";
 			}
 		
-			$query_params = "";	
-			if (isset($_REQUEST['categories_id']) && $_REQUEST['categories_id']!='') {
-				$query_params = " and pic_category=".$_REQUEST['categories_id']."";
-			}
 		
-		$query_ads = mysqli_query($this->mysqlConfig(),"select * from pic_addpost where addpost_status = 1 $query_params and (pic_user_id = ".$query_search.") ".$str_location."".$str_nearer."".$str_cate."  order by $order LIMIT 5 OFFSET ".$_REQUEST['offset']."");
+		
+		$query_ads = mysqli_query($this->mysqlConfig(),"select * from pic_addpost where addpost_status = 1 and (pic_user_id = ".$query_search.") ".$str_location."".$str_nearer."".$str_cate."  order by $order LIMIT 5 OFFSET ".$_REQUEST['offset']."");
 		$count_rows = mysqli_num_rows($query_ads);
 		
 		while($row = mysqli_fetch_object($query_ads)) {
