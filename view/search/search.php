@@ -136,11 +136,11 @@ class search extends config
 		?>
 		<script>
 			function loadmore_mobile_layout() {
-				loadmore_search(<?php echo $_REQUEST['p']; ?>, <?php echo $_REQUEST['type']; ?>, "<?php echo $_REQUEST['search_pic']; ?>", <?php echo $_REQUEST['sort']; ?>,<?php echo $_REQUEST['c']; ?>);
+				loadmore_search(<?php echo $_REQUEST['p']; ?>, <?php echo $_REQUEST['type']; ?>, "<?php echo $_REQUEST['search_pic']; ?>", <?php echo $_REQUEST['sort']; ?>);
 			}
 
 
-			function loadmore_search(page, type, cat_id, sort,categories_id) {
+			function loadmore_search(page, type, cat_id, sort) {
 
 
 				pages = page + 1;
@@ -154,7 +154,6 @@ class search extends config
 					'search_pic': cat_id,
 					'type': type,
 					'p': pages,
-					'c': categories_id,
 					'offset': offsets,
 					'action': "view",
 					'module': "search",
@@ -474,29 +473,12 @@ AND pic_categories.categories_id = pic_addpost.pic_category )  WHERE  (addpost_s
 				}
 				$dates = date("Y-m-d");
 
-				$query_params = "";	
-               
-			    if (isset($_REQUEST['c']) && $_REQUEST['c']!='') {
-				   $query_params = " and pic_category=".$_REQUEST['c']."";
-				   
-			    }
-
-
-				
-				$query_ads = mysqli_query($this->mysqlConfig(), "SELECT * FROM pic_addpost WHERE  addpost_status = 1 $query_params and  pic_request=" . $_REQUEST['type'] . " and (`pic_title` LIKE  '%$query_search%' or `pic_tag` LIKE  '%$query_search%' or `pic_ads_id` LIKE  '%$query_search%' or `pic_admin_tag` LIKE  '%$query_search%') order by $order LIMIT 5 OFFSET " . $_REQUEST['offset'] . "");
+				$query_ads = mysqli_query($this->mysqlConfig(), "SELECT * FROM pic_addpost WHERE  addpost_status = 1 and  pic_request=" . $_REQUEST['type'] . " and (`pic_title` LIKE  '%$query_search%' or `pic_tag` LIKE  '%$query_search%' or `pic_ads_id` LIKE  '%$query_search%' or `pic_admin_tag` LIKE  '%$query_search%') order by $order LIMIT 5 OFFSET " . $_REQUEST['offset'] . "");
 				$count_rows = mysqli_num_rows($query_ads);
 
 				while ($row = mysqli_fetch_object($query_ads)) {
 
-					if (isset($_REQUEST['c']) && $_REQUEST['c']!='') {
-						$this->loopAds($row->pic_ads_id, $row->pic_user_id, $row->pic_title, $row->pic_discription, $row->pic_add_taluk, $row->pic_post_city, $row->pic_postdate, $row->pic_price,$_REQUEST['c']);
-
-					} else {
-
-						$this->loopAds($row->pic_ads_id, $row->pic_user_id, $row->pic_title, $row->pic_discription, $row->pic_add_taluk, $row->pic_post_city, $row->pic_postdate, $row->pic_price,);
-
-					}
-
+					$this->loopAds($row->pic_ads_id, $row->pic_user_id, $row->pic_title, $row->pic_discription, $row->pic_add_taluk, $row->pic_post_city, $row->pic_postdate, $row->pic_price);
 				}
 
 				if ($count_rows > 4) { ?>

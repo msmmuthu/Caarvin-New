@@ -412,6 +412,7 @@ class indexcontroller {
              }
 			  elseif (isset($_REQUEST['action'],$_REQUEST['post']) and $_REQUEST['action'] == "view" && $_REQUEST['module'] == "search" && $_REQUEST['post'] == "form" && $_REQUEST['post2'] == "loadmoresearch") {
             
+             //echo "hi2-3";
              $instanceClass->list_products_loadmore();
            
            

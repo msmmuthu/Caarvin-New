@@ -155,7 +155,7 @@ class product_detail extends config
                 $profileUser = mysqli_query($this->mysqlConfig(), "SELECT user_pic FROM `pic_user` where user_id = {$_REQUEST['ads_uid']} limit 1");
                 $rowProfileUser = mysqli_fetch_object($profileUser);
 
-                if(isset($rowProfileUser->user_pic) && $rowProfileUser->user_pic==''){
+                if($rowProfileUser->user_pic==''){
                     $profile_img_url = 'img/avatar.jpg';
                 }
                 else{
@@ -249,11 +249,10 @@ class product_detail extends config
                 }
                ?>
             
-              
-
-<a href="#<?php echo $modal; ?>" data-toggle="modal" ads_id="<?php echo $_REQUEST['ads_id']; ?>"  ads_uid="<?php echo $_REQUEST['ads_uid']; ?>"   user_name="<?php echo $rowuser1->user_username; ?>" user_mob="<?php echo $rowuser1->user_mobile; ?>" user_email="<?php echo $rowuser1->user_email; ?>" module="<?php echo $module; ?>" class="like1 like btn btn-primary btn-white like"><?php echo $modal;?> <?php if ($modal == "liked") { ?>
-								 <i class="text-success fa fa-check-circle"></i> <?php  } ?>
-								</a>
+               <a href="#<?php echo $modal; ?>" title="<?php echo $modal; ?>" data-toggle="modal" ads_id="<?php echo $_REQUEST['ads_id']; ?>"  ads_uid="<?php echo $_REQUEST['ads_uid']; ?>"   user_name="<?php echo $rowuser1->user_username; ?>" user_mob="<?php echo $rowuser1->user_mobile; ?>" user_email="<?php echo $rowuser1->user_email; ?>" module="<?php echo $module; ?>" class="like1 like like">
+               <?php if ($modal == "liked") { ?>
+                 <i class="fas fa-thumbs-up" style="font-size:40px;color:green;"></i> <?php } else {?>  <i style="font-size:40px" class="fa">&#xf087;</i> <?php } ?> 
+</a>
                
                </div>
                </div>
@@ -411,33 +410,17 @@ class product_detail extends config
                                                                                                                 } else { ?> Call Me<?php }   ?>
                                 </a>
 
-                                
+                                <a href="index.php?action=view&module=owner&post=list&owner_id=<?php echo $pic_user_id; ?>&type=0&p=1&sort=0&offset=0" class="btn btn-outline-primary btn-block">
+                                    <i class="fa fa-align-justify fa-1x"></i></span>&nbsp;&nbsp; View more ads
+                                </a>
+                                <a href="index.php?action=view&module=owner&post=list&owner_id=<?php echo $pic_user_id; ?>&type=0&p=1&sort=0&offset=0" class="btn btn-outline-primary btn-block">
+                                    <i class="fa fa-align-justify fa-1x"></i></span>&nbsp;&nbsp; View more ads from the same user
+                                </a>
                             </div>
                         </div>
 
                     </div>
                     <?php } ?>
-                    
-                    
-
-                    <div class="row  p-2 mt-2" style="border: 1px solid #dee2e6;">
-                        <div class="col-sm-12 col-md-12 col-lg-12">
-                        <a href="index.php?action=view&module=owner&post=list&owner_id=<?php echo $pic_user_id; ?>&type=0&p=1&sort=0&offset=0&categories_id=<?php echo $pic_category;?>" class="btn btn-outline-primary btn-block">
-                                    <i class="fa fa-align-justify fa-1x"></i></span>&nbsp;&nbsp; View more ads</a>
-                        <a href="index.php?action=view&module=owner&post=list&owner_id=<?php echo $pic_user_id; ?>&type=0&p=1&sort=0&offset=0" class="btn btn-outline-primary btn-block">
-                                    <i class="fa fa-align-justify fa-1x"></i></span>&nbsp;&nbsp; View more ads from the same user
-                                </a>
-                        </div>
-                    </div>
-
-                    
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div style="float:right;marigin-right:5px;marigin-top:5px !important;padding-top:8px;">
-                          <a style="marigin-top:5px;" href="#<?php echo $modal; ?>" data-toggle="modal" ads_id="<?php echo $_REQUEST['ads_id']; ?>"  ads_uid="<?php echo $_REQUEST['ads_uid']; ?>"   user_name="<?php echo $rowuser1->user_username; ?>" user_mob="<?php echo $rowuser1->user_mobile; ?>" user_email="<?php echo $rowuser1->user_email; ?>" module="<?php echo $module; ?>" class="like1 like btn btn-primary btn-white like"><?php echo $modal;?> <?php if ($modal == "liked") { ?>
-								 <i class="text-success fa fa-check-circle"></i> <?php  } ?>
-								</a>
-                    </div> 
-                    </div>
 
                     <?php
                     if ($row_contact->pic_map_lan != "") {
