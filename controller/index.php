@@ -146,6 +146,13 @@ class indexcontroller {
 		$instanceClass->list_products();
 		require("view/static/footer.php");
         }
+
+        elseif (isset($_REQUEST['action']) and $_REQUEST['action'] == "view" && $_REQUEST['module'] == "owner_cat" && $_REQUEST['post'] == "list" && $_REQUEST['categories_id']!='') {
+            
+            require("view/static/header.php");
+            $instanceClass->list_products_categry();
+            require("view/static/footer.php");
+            }
 		
 		// SEARCH IN SUB CATEGORY
 		
@@ -412,11 +419,20 @@ class indexcontroller {
              }
 			  elseif (isset($_REQUEST['action'],$_REQUEST['post']) and $_REQUEST['action'] == "view" && $_REQUEST['module'] == "search" && $_REQUEST['post'] == "form" && $_REQUEST['post2'] == "loadmoresearch") {
             
-             //echo "hi2-3";
              $instanceClass->list_products_loadmore();
            
            
              }
+
+             elseif (isset($_REQUEST['action'],$_REQUEST['post']) and $_REQUEST['action'] == "view" && $_REQUEST['module'] == "search_cat" && $_REQUEST['post'] == "form" && $_REQUEST['post2'] == "loadmoresearch") {
+                $instanceClass->list_products_loadmore_cat();
+              
+
+                }
+
+
+
+
              elseif (isset($_REQUEST['action']) and $_REQUEST['action'] == "view" && $_REQUEST['module'] == "search" && $_REQUEST['post'] == "filter") {
              //echo "hi2-4";
              require("view/static/header.php");
@@ -426,7 +442,8 @@ class indexcontroller {
              }
              
              elseif (isset($_REQUEST['action'],$_REQUEST['post']) and $_REQUEST['action'] == "view" && $_REQUEST['module'] == "owner" && $_REQUEST['post'] == "form" && $_REQUEST['post2'] != "loadmoresearch") {
-             require("view/static/header.php");
+             
+                require("view/static/header.php");
              $instanceClass->list_products();
               require("view/static/footer.php");
              }
