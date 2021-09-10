@@ -249,7 +249,7 @@ class product_detail extends config
                 }
                ?>
             
-                <a href="#<?php echo $modal; ?>" data-toggle="modal" ads_id="<?php echo $_REQUEST['ads_id']; ?>"  ads_uid="<?php echo $_REQUEST['ads_uid']; ?>"   user_name="<?php echo $rowuser1->user_username; ?>" user_mob="<?php echo $rowuser1->user_mobile; ?>" user_email="<?php echo $rowuser1->user_email; ?>" module="<?php echo $module; ?>" class="like1 like btn btn-primary btn-white like"><?php echo $modal;?> <?php if ($modal == "liked") { ?>
+                <a href="#<?php echo $modal; ?>" data-toggle="modal" ads_id="<?php echo $_REQUEST['ads_id']; ?>"  ads_uid="<?php echo $_REQUEST['ads_uid']; ?>"   user_name="<?php echo $rowuser1->user_username; ?>" user_mob="<?php echo $rowuser1->user_mobile; ?>" user_email="<?php echo $rowuser1->user_email; ?>" module="<?php echo $module; ?>" class="like1 like btn btn-primary btn-white like"><?php echo strtoupper($modal);?> <?php if ($modal == "liked") { ?>
 								 <i class="text-success fa fa-check-circle"></i> <?php  } ?>
 								</a>
                
@@ -558,7 +558,7 @@ class product_detail extends config
 
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <div style="float:right;marigin-right:5px;marigin-top:5px !important;padding-top:8px;">
-                          <a style="marigin-top:5px;" href="#<?php echo $modal; ?>" data-toggle="modal" ads_id="<?php echo $_REQUEST['ads_id']; ?>"  ads_uid="<?php echo $_REQUEST['ads_uid']; ?>"   user_name="<?php echo $rowuser1->user_username; ?>" user_mob="<?php echo $rowuser1->user_mobile; ?>" user_email="<?php echo $rowuser1->user_email; ?>" module="<?php echo $module; ?>" class="like1 like btn btn-primary btn-white like"><?php echo $modal;?> <?php if ($modal == "liked") { ?>
+                          <a style="marigin-top:5px;" href="#<?php echo $modal; ?>" data-toggle="modal" ads_id="<?php echo $_REQUEST['ads_id']; ?>"  ads_uid="<?php echo $_REQUEST['ads_uid']; ?>"   user_name="<?php echo $rowuser1->user_username; ?>" user_mob="<?php echo $rowuser1->user_mobile; ?>" user_email="<?php echo $rowuser1->user_email; ?>" module="<?php echo $module; ?>" class="like1 like btn btn-primary btn-white like"><?php echo strtoupper($modal);?> <?php if ($modal == "liked") { ?>
 								 <i class="text-success fa fa-check-circle"></i> <?php  } ?>
 								</a>
                     </div> 
