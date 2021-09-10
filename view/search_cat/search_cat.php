@@ -501,7 +501,8 @@ AND pic_categories.categories_id = pic_addpost.pic_category )  WHERE  (addpost_s
 				   
 			    }
 
-				
+
+
 				$query_ads = mysqli_query($this->mysqlConfig(), "SELECT * FROM pic_addpost WHERE  addpost_status = 1 $query_params and  pic_request=" . $_REQUEST['type'] . "  order by $order LIMIT 5 OFFSET " . $_REQUEST['offset'] . "");
 				$count_rows = mysqli_num_rows($query_ads);
 

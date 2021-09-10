@@ -384,7 +384,7 @@ echo $adid;
          <script>
         function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	
-	  eval(targ+".location='"+"?module=owner_cat&action=view&p=1&post=form&owner_id=<?php echo $_REQUEST['owner_id']; ?>&offset=0&type="+$("#adstype").val()+"&sort="+$("#sorting").val()+"'");
+	  eval(targ+".location='"+"?module=owner_cat&action=view&p=1&post=list&owner_id=<?php echo $_REQUEST['owner_id']; ?>&categories_id=<?php echo $_REQUEST['categories_id']; ?>&offset=0&type="+$("#adstype").val()+"&sort="+$("#sorting").val()+"'");
 	  if (restore) selObj.selectedIndex=0;
 	}
 	
@@ -392,7 +392,7 @@ echo $adid;
     	<script>
         function MM_jumpMenu2(targ,selObj,restore){ //v3.0
 	
-	  eval(targ+".location='"+"?module=owner_cat&action=view&p=1&post=form&owner_id=<?php echo $_REQUEST['owner_id']; ?>&offset=0&type="+$("#adstype").val()+"&sort="+$("#sorting").val()+"'");
+	  eval(targ+".location='"+"?module=owner_cat&action=view&p=1&post=list&owner_id=<?php echo $_REQUEST['owner_id']; ?>&categories_id=<?php echo $_REQUEST['categories_id']; ?>&offset=0&type="+$("#adstype").val()+"&sort="+$("#sorting").val()+"'");
 	  if (restore) selObj.selectedIndex=0;
 	}
 	</script>
@@ -521,7 +521,7 @@ echo $adid;
 			<script>
 		   function MM_jumpMenu(targ,selObj,restore){ //v3.0
 	   
-		 eval(targ+".location='"+"?module=owner_cat&action=view&p=1&post=form&offset=0&type="+$("#adstype").val()+"&sort="+$("#sorting").val()+"'");
+		 eval(targ+".location='"+"?module=owner_cat&action=view&p=1&owner_id=<?php echo $_REQUEST['owner_id']; ?>&categories_id=<?php echo $_REQUEST['categories_id']; ?>&post=list&offset=0&type="+$("#adstype").val()+"&sort="+$("#sorting").val()+"'");
 		 if (restore) selObj.selectedIndex=0;
 	   }
 	   
@@ -529,7 +529,7 @@ echo $adid;
 		   <script>
 		   function MM_jumpMenu2(targ,selObj,restore){ //v3.0
 	   
-		 eval(targ+".location='"+"?module=owner_cat&action=view&p=1&post=form&offset=0&type="+$("#adstype").val()+"&sort="+$("#sorting").val()+"'");
+		 eval(targ+".location='"+"?module=owner_cat&action=view&p=1&post=list&owner_id=<?php echo $_REQUEST['owner_id']; ?>&categories_id=<?php echo $_REQUEST['categories_id']; ?>&offset=0&type="+$("#adstype").val()+"&sort="+$("#sorting").val()+"'");
 		 if (restore) selObj.selectedIndex=0;
 	   }
 	   </script>
@@ -552,8 +552,6 @@ echo $adid;
 		   if (isset($_REQUEST['categories_id']) && $_REQUEST['categories_id']!='') {
 			   $query_params = " and pic_category=".$_REQUEST['categories_id']."";
 		   }
-
-   
    
 		   $query_ads = mysqli_query($this->mysqlConfig(),"SELECT * FROM pic_addpost WHERE  addpost_status = 1 ".$query_params." and pic_request=".$_REQUEST['type']."   order by $order LIMIT 5 OFFSET ".$_REQUEST['offset']."");
 		   
@@ -1012,6 +1010,9 @@ echo $adid;
 			if (isset($_REQUEST['categories_id']) && $_REQUEST['categories_id']!='') {
 				$query_params = " and pic_category=".$_REQUEST['categories_id']."";
 			}
+
+
+		
 		
 		$query_ads = mysqli_query($this->mysqlConfig(),"select * from pic_addpost where addpost_status = 1 $query_params  ".$str_location."".$str_nearer."".$str_cate."  order by $order LIMIT 5 OFFSET ".$_REQUEST['offset']."");
 		$count_rows = mysqli_num_rows($query_ads);
@@ -1057,11 +1058,16 @@ echo $adid;
 	}
 	</script>
     
-            
+
+	<?php
+	$query_ads1 = mysqli_query($this->mysqlConfig(),"select pic_id  from pic_addpost where addpost_status = 1 and pic_request=0 and pic_category=".$_REQUEST['categories_id']."   ");
+	$count_rows1 = mysqli_num_rows($query_ads1);
+	?>
+           
              
              <div class="col-sm-12 col-md-12 col-lg-12">
              <h6 class="hint">
-                 Showing <span class="text-primary"><?php echo $misc2->get_value('pic_user', 'user_id', $owner_id, 'user_id_unique') ?></span> Ads
+                 Showing <span class="text-primary"><?php echo $count_rows1; ?></span> Ads
              </h6>
             </div>
             

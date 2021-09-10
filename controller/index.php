@@ -148,6 +148,7 @@ class indexcontroller {
         }
 
         elseif (isset($_REQUEST['action']) and $_REQUEST['action'] == "view" && $_REQUEST['module'] == "owner_cat" && $_REQUEST['post'] == "list" && $_REQUEST['categories_id']!='') {
+            
             require("view/static/header.php");
             $instanceClass->list_products_categry();
             require("view/static/footer.php");
