@@ -8,7 +8,7 @@ class config{
 		$servername = "localhost";
 		$username = "devavv";
 		$password = "vvinWIN@2019";
-		$dbname = "jobbvin";
+		$dbname = "abocarz";
 		
         $conn = mysqli_connect($servername, $username, $password, $dbname);
         return $conn;
