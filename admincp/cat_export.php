@@ -2,7 +2,7 @@
 $servername = "localhost";
 		$username = "devavv";
 		$password = "vvinWIN@2019";
-		$dbname = "jobbvin";
+		$dbname = "abocarz";
 
 //$link = mysqli_connect(DB_HOST, DB_USER, DB_PASS) or die("Couldn't make connection.");
 //$db = mysqli_select_db(DB_NAME, $link) or die("Couldn't select database");

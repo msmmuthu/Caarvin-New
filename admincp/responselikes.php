@@ -4,7 +4,7 @@ session_start();
 $servername = "localhost";
 		$username = "devavv";
 		$password = "vvinWIN@2019";
-		$dbname = "jobbvin";
+		$dbname = "abocarz";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname) or die("Connection failed: " . mysqli_connect_error());
 
