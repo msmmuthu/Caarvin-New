@@ -163,7 +163,7 @@ class product_detail extends config
                 }
                 ?>
 
-                <div style="display:none;" class="col-sm-12 col-md-12 col-lg-8">
+                <div  class="col-sm-12 col-md-12 col-lg-8">
 
                     <h4 class="pt-2"><?php echo $row->pic_title; ?></h4>
 
@@ -348,7 +348,7 @@ class product_detail extends config
                             <?php echo $pic_discription; ?>
                         </div>
                     </div>
-                    <?php if ($modal == "liked") { ?>
+                    <!-- <?php if ($modal == "liked") { ?>
                     <div class="row  p-2 mt-2" style="border: 1px solid #dee2e6;">
                         <div class="col-sm-12 col-md-12 col-lg-12">
                             <h4>Download File</h4>
@@ -361,7 +361,11 @@ class product_detail extends config
                                 <img src="img/<?php echo $imgIconName; ?>" width="100" />
                             </a>
                         </div>
-                    </div>
+                    
+                    
+                    
+                    
+                    </div> -->
                     
                     <div class="row  p-2 mt-2" style="border: 1px solid #dee2e6;">
                         <div class="col-sm-12 col-md-12 col-lg-12">
