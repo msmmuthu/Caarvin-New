@@ -156,7 +156,7 @@ class postad extends config
 
 
 
-        /* //Image with crop
+         //Image with crop
         if (isset($_POST['img_data']) and $_POST['img_data'] != "") {
             $croped_image = $_POST['img_data'];
             $z = 1;
@@ -164,10 +164,10 @@ class postad extends config
                 //list($type, $croped_image) = explode(';', $croped_image);
                 list(, $croped_images) = explode(',', $croped_images);
                 $croped_images = base64_decode($croped_images);
-                //$image_name = time().'.jpg';
+                ///$image_name = time().'.jpg';
                 $name = microtime() . "_" . $z . '.jpg';
                 $name = str_replace(' ', '_', $name);
-                // upload cropped image to server 
+               // upload cropped image to server 
                 file_put_contents('media/' . $name, $croped_images);
                 file_put_contents('media/small/' . $name, $croped_images);
                 file_put_contents('media/thumnails/' . $name, $croped_images);

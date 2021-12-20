@@ -469,44 +469,244 @@ class postad extends config
                                     max-width: 150px;
                                 }
                             </style>
-                            <script type="text/javascript">
-                                function checkFileUpload(fileId) {
-                                    var browseFileId = document.getElementById(fileId);
-                                    var fileUploadTxtId = document.getElementById('fileUploadTxt');
-                                    var fileUploadErrHolderId = document.getElementById('fileUploadErrHolderId');
-                                    if (browseFileId.files.length === 0) {
-                                        return;
-                                    }
-                                    console.log(browseFileId.files[0]);
-                                    var fileInfo = browseFileId.files[0];
-                                    var fileType = fileInfo.type;
-                                    if (fileType.indexOf('word') >= 0 || fileType.indexOf('pdf') >= 0) {
-                                        fileUploadErrHolderId.style.display = 'none';
-                                        fileUploadTxtId.innerHTML = fileInfo.name;
-                                    } else {
-                                        browseFileId.value = '';
-                                        fileUploadErrHolderId.style.display = 'block';
-                                        fileUploadTxtId.innerHTML = 'Upload File *';
-                                    }
-                                }
-                            </script>
+                            
+                            <?php if ($id_check == "") {                               
+								$misc2 = new misc2();
+                                $scheme_photo = $misc2->get_value_limit('pic_scheme_user', 'pic_user_id', $_SESSION['pic']['biscuit']['userid'], 'payment_status', 'Approved', 'photo_limit', 'pic_scheme_user_id', 'DESC');
+                                //$scheme_photo = $misc2->get_value('pic_scheme', 'scheme_id', $pic_scheme_id, 'scheme_photo');
+                            ?>
+                                <div class="form-group">
 
-                            <?php if ($id_check == "") { ?>
-                                <div class="editroute btn btn-light btn-block" style="position:relative;">
-                                    <input id="fileUploadId" type="file" name="fileUpload[]" class="fileUploadCls" onchange="checkFileUpload('fileUploadId')" value="" />
-                                    <span><i class="fa fa-upload"></i> <span id="fileUploadTxt">Upload File</span></span>
+                                    <script type="text/javascript">
+                                        var fileReader = new FileReader();
+                                        var filterType = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
+                                        var resize_width = 600;
+
+                                        function compress(uploadFile, fileReader, final_img, final_preview, file_input) {
+
+
+                                            fileReader.onload = function(el) {
+                                                var image = new Image();
+                                                image.onload = function() {
+                                                    //document.getElementById("original-Img").src=image.src;
+                                                    var canvas = document.createElement("canvas");
+                                                    var context = canvas.getContext("2d");
+                                                    var custom_size = image.width / 1000;
+                                                    //var custom_height = image.height/1000;
+
+                                                    var scaleFactor = resize_width / image.width;
+                                                    canvas.width = (image.width > 600 && image.height > 600) ? resize_width : image.width;
+                                                    canvas.height = (image.width > 600 && image.height > 600) ? image.height * scaleFactor : image.height;
+                                                    context.drawImage(image,
+                                                        0,
+                                                        0,
+                                                        image.width,
+                                                        image.height,
+                                                        0,
+                                                        0,
+                                                        canvas.width,
+                                                        canvas.height
+                                                    );
+
+                                                    document.getElementById(final_preview).src = canvas.toDataURL();
+                                                    document.getElementById(final_img).value = canvas.toDataURL();
+
+                                                }
+                                                image.src = event.target.result;
+                                                $("#" + file_input + "").val('');
+                                                $("#btn_" + file_input).show();
+                                            };
+                                        }
+
+
+                                        var loadImageFile = function(file_input, final_img, final_preview) {
+                                            var uploadImage = document.getElementById(file_input);
+
+                                            //check and retuns the length of uploded file.
+                                            if (uploadImage.files.length === 0) {
+                                                return;
+                                            }
+
+                                            //Is Used for validate a valid file.
+                                            var uploadFile = document.getElementById(file_input).files[0];
+                                            if (!filterType.test(uploadFile.type)) {
+                                                alert("Please select a valid image.");
+                                                return;
+                                            }
+                                            compress(uploadFile, fileReader, final_img, final_preview, file_input);
+                                            fileReader.readAsDataURL(uploadFile);
+                                        }
+
+                                        var removeImg = function(imgId) {
+                                            $("#img_preview_" + imgId).attr("src", "assets/images/uploadImg.jpg");
+                                            $("#img_data_" + imgId).val('');
+                                            $("#btn_img_choosefile_" + imgId).hide();
+                                        }
+                                    </script>
+
+
+                                    <a href="#picture_upload_modal" data-toggle="modal" ads-id="<?php echo $_REQUEST['id']; ?>" class="editroute btn btn-light btn-block"><i class="fa fa-camera"></i> Pictures</a>
+
                                 </div>
-                                <div id="fileUploadErrHolderId" class="form-group">
-                                    <div class="fileUploadErrMsgCls">Permitted file types : pdf, doc, docx</div>
-                                </div>
+                                <div class="modal fade bd-example-modal-lg" id="picture_upload_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+
+                                    <div class="modal-dialog postAdImgModalDialog" role="document">
+
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+
+                                                <h5 class="modal-title">Picture</h5>
+
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                                                    <span aria-hidden="true">&times;</span>
+
+                                                </button>
+
+                                            </div>
+
+                                            <div class="modal-body postAdImgModal" id="dynamicedit">
+
+                                                <div class="imgHolderContainer">
+
+                                                    <?php
+                                                    for ($i = 1; $i <= $scheme_photo; $i++) {
+                                                    ?>
+                                                        <div class="imgContainer">
+                                                            <div class="container contCls bg-light p-2 mb-2" style="border:1px dashed #ccc;">
+                                                                <h5 class="">Picture <?php echo $i; ?></h5>
+                                                                <hr />
+
+                                                                <div class="row img_preview">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12 col-md-12 col-lg-12 pb-0">
+                                                                            <div class="content_div form-group">
+                                                                                <input type="hidden" name="img_data[]" id="img_data_<?php echo $i; ?>" value="" />
+                                                                                <div class="previewImgCls">
+                                                                                    <img id="img_preview_<?php echo $i; ?>" class="img-thumbnail" src="assets/images/uploadImg.jpg">
+                                                                                    <button id="btn_img_choosefile_<?php echo $i; ?>" onclick="removeImg(<?php echo $i; ?>)" type="button" class="previewImgRemCls">X</button>
+                                                                                    <input class="form-control-file previewImgBrowseCls" type="file" accept="image/*" name="files[]" id="img_choosefile_<?php echo $i; ?>" onchange="loadImageFile('img_choosefile_<?php echo $i; ?>','img_data_<?php echo $i; ?>','img_preview_<?php echo $i; ?>');">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- <div class="col-sm-6 col-md-6 col-lg-6 pb-0">
+
+                                                                        <div class="form-group">
+                                                                            <label for="img_choosefile_<?php echo $i; ?>">Browse to upload</label>
+                                                                            <input class="form-control-file" type="file" accept="image/*" name="files[]" id="img_choosefile_<?php echo $i; ?>" onchange="loadImageFile('img_choosefile_<?php echo $i; ?>','img_data_<?php echo $i; ?>','img_preview_<?php echo $i; ?>');">
+                                                                        </div>
+
+                                                                    </div> -->
+
+
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12 col-md-12 col-lg-12 pb-0 imgAlignBottomCls">
+                                                                            <div class="form-group">
+                                                                                <!-- <label for="textfield_<?php echo $i; ?>">Title</label> -->
+                                                                                <input type="text" placeholder="Title" name="textfield_<?php echo $i; ?>" id="textfield_<?php echo $i; ?>" value="" class="form-control" />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <!-- <div class="col-sm-6 col-md-6 col-lg-6 pb-0 imgAlignBottomCls">
+                                                                        <div class="form-group">
+                                                                            <!-- <label for="textfield2_<?php echo $i; ?>">Description</label> 
+                                                                            <input type="text" placeholder="Description" name="textfield2_<?php echo $i; ?>" id="textfield2_<?php echo $i; ?>" value="" class="form-control" />
+                                                                        </div>
+                                                                    </div> -->
+
+                                                                </div>
+
+
+
+                                                            </div>
+
+
+
+
+
+                                                        </div>
+                                                    <?php
+                                                    }
+                                                    ?>
+
+
+                                                </div>
+
+                                                <!-- <?php
+                                                        for ($i = 1; $i <= $scheme_photo; $i++) {
+                                                        ?>
+
+                                                    <div class="container bg-light p-2 mb-2" style="border:1px dashed #ccc;">
+                                                        <h5 class="">Picture <?php echo $i; ?></h5>
+                                                        <hr />
+
+                                                        <div class="row img_preview">
+
+                                                            <div class="col-sm-6 col-md-6 col-lg-6 pb-0">
+                                                                <div class="content_div form-group">
+                                                                    <input type="hidden" name="img_data[]" id="img_data_<?php echo $i; ?>" value="" />
+                                                                    <img id="img_preview_<?php echo $i; ?>" class="img-thumbnail" src="http://placehold.it/1000x1000">
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6 col-lg-6 pb-0">
+
+                                                                <div class="form-group">
+                                                                    <label for="img_choosefile_<?php echo $i; ?>">Browse to upload</label>
+                                                                    <input class="form-control-file" type="file" accept="image/*" name="files[]" id="img_choosefile_<?php echo $i; ?>" onchange="loadImageFile('img_choosefile_<?php echo $i; ?>','img_data_<?php echo $i; ?>','img_preview_<?php echo $i; ?>');">
+                                                                </div>
+
+                                                            </div>
+
+
+
+                                                            <div class="col-sm-6 col-md-6 col-lg-6 pb-0">
+                                                                <div class="form-group">
+                                                                    <label for="textfield_<?php echo $i; ?>">Title</label>
+                                                                    <input type="text" name="textfield_<?php echo $i; ?>" id="textfield_<?php echo $i; ?>" value="" class="form-control" />
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="col-sm-6 col-md-6 col-lg-6 pb-0">
+                                                                <div class="form-group">
+                                                                    <label for="textfield2_<?php echo $i; ?>">Description</label>
+                                                                    <input type="text" name="textfield2_<?php echo $i; ?>" id="textfield2_<?php echo $i; ?>" value="" class="form-control" />
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+
+
+
+
+                                                <?php
+                                                        }
+                                                ?> -->
+
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Done</button>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+	</div>
                             <?php } else { ?>
-                                <a target="_blank" href="<?php echo BASE_URL . $getFileArr->pic_file_url; ?>">Download File </a>
-                                <div class="editroute btn btn-light btn-block" style="position:relative;">
-                                    <input id="fileUploadId" type="file" name="fileUpload[]" class="fileUploadCls" onchange="checkFileUpload('fileUploadId')" value="" />
-                                    <span><i class="fa fa-upload"></i> <span id="fileUploadTxt">Upload File </span></span>
-                                </div>
-                                <div id="fileUploadErrHolderId" class="form-group">
-                                    <div class="fileUploadErrMsgCls">Permitted file types : pdf, doc, docx</div>
+                                <div class="form-group">
+                                    <a href="#editroute" data-toggle="modal" ads-id="<?php echo $_REQUEST['id']; ?>" class="editroute btn btn-light btn-block"><i class="fa fa-camera"></i> Pictures</a>
                                 </div>
                             <?php } ?>
 

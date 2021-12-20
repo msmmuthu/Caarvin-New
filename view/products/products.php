@@ -1,12 +1,13 @@
 <?php
 
-class products extends config
-{
-	public function headerscript()
+class products extends config{
+
+public function headerscript()
 	{
 ?>
 		<script src="dist/js/jquery-3.4.1.min.js"></script>
 		<script src="dist/js/popper.min.js"></script>
+		
 		<div class="modal fade bd-example-modal-lg" id="liked" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 
 			<div class="modal-dialog" role="document">
@@ -1353,12 +1354,12 @@ class products extends config
 		$profileUser = mysqli_query($this->mysqlConfig(), "SELECT user_pic FROM `pic_user` where user_id = $adsuserid limit 1");
 		$rowProfileUser = mysqli_fetch_object($profileUser);
 
-		if($rowProfileUser->user_pic==''){
-			$profile_img_url = 'img/avatar.jpg';
-		}
-		else{
-			$profile_img_url = 'media/profile/'.$rowProfileUser->user_pic;
-		}
+		//if($rowProfileUser->user_pic==''){
+		//	$profile_img_url = 'img/avatar.jpg';
+		//}
+		//else{
+		//	$profile_img_url = 'media/profile/'.$rowProfileUser->user_pic;
+		//}
 
 	?>
 
@@ -1391,14 +1392,14 @@ class products extends config
 						$query_img = mysqli_query($this->mysqlConfig(), "select * from pic_addpost_images where addpost_id='$adid' order by ad_image_id ASC limit 1");
 						$row_img = mysqli_fetch_object($query_img);
 						$row_nm = mysqli_num_rows($query_img);
-						//if ($row_nm == 1) {
+						if ($row_nm == 1) {
 						?>
-							 <!--<img class="card-img" src="media/thumnails/<?php echo $row_img->ad_image_url; ?>" width="200px" height="240px"> -->
-						<?php // } else { ?>
-							<!--<img class="card-img" src="css/images/no_images.jpg" width="200px" height="240px"> -->
-						<?php // } ?>
+							 <img class="card-img" src="media/thumnails/<?php echo $row_img->ad_image_url; ?>" width="200px" height="240px"> 
+						<?php  } else { ?>
+							<img class="card-img" src="css/images/no_images.jpg" width="200px" height="240px"> 
+						<?php  } ?>
 						
-						<div style="padding:3px;"><img class="card-img" src="<?php echo $profile_img_url; ?>" height="50%"  style="width:50%;"></div>
+						<!-- <div style="padding:3px;"><img class="card-img" src="<?php echo $profile_img_url; ?>" height="50%"  style="width:50%;"></div> -->
 						
 						
 

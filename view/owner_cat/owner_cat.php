@@ -276,12 +276,12 @@ else{
 
 if($row_nm==1){
 ?>
-<img class="card-img"  src="media/small/<?php echo $row_img->ad_image_url; ?>" style="display:none;"> 
+<img class="card-img"  src="media/small/<?php echo $row_img->ad_image_url; ?>" > 
 <?php } else { ?>
-<img class="card-img" src="css/images/no_images.jpg" style="display:none;"> 
+<img class="card-img" src="css/images/no_images.jpg" > 
 <?php } ?>
 
-<div style="padding:3px;"><img class="card-img" src="<?php echo $profile_img_url; ?>" height="50%"  style="width:50%;"></div>
+<!-- <div style="padding:3px;"><img class="card-img" src="<?php echo $profile_img_url; ?>" height="50%"  style="width:50%;"></div> -->
 
 
     </div>

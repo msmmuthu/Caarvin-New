@@ -263,9 +263,9 @@ $row_img = mysqli_fetch_object($query_img);
 $row_nm = mysqli_num_rows($query_img);
 if($row_nm==1){
 ?>
-<img class="card-img" style="display:none" src="media/small/<?php echo $row_img->ad_image_url; ?>"> 
+<img class="card-img" src="media/small/<?php echo $row_img->ad_image_url; ?>"> 
 <?php } else { ?>
-<img class="card-img" src="css/images/no_images.jpg" style="display:none"> 
+<img class="card-img" src="css/images/no_images.jpg"> 
 <?php } ?>
 
     </div>
