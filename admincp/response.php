@@ -58,6 +58,13 @@ if (mysqli_connect_errno()) {
 	
 	}
 
+	if ($where != '' && isset($_GET['status'])) {
+		$where .="  && addpost_status = ". $_GET['status'];
+	}
+	else if(isset($_GET['status'])){
+		$where .=" where addpost_status = ". $_GET['status'];
+	}
+		
 	// getting total number records without any search
 	
 	

@@ -471,7 +471,16 @@ Change Image: <input type="file" name="files[]" multiple="multiple" id="files">
       <li class="nav-item">
           <a class="nav-link" href="field_export.php">Export Ads Fields</a>
       </li>
-     
+
+      <li class="nav-item">
+          <a class="nav-link"  href="#"><input id="listAll" name="filterStatus" type = "radio">List All</input></a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link"  href="#"><input id="pendingApprovals" checked="checked" name="filterStatus" type = "radio">Show Pending Approvals</input></a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link"  href="#"><input id="approved" name="filterStatus" type = "radio">Show Approved</input></a>
+      </li>
     </ul>
   </div>
 </nav>
@@ -530,13 +539,45 @@ Change Image: <input type="file" name="files[]" multiple="multiple" id="files">
 </div>
 <script>
 
-		
+            $statusValue = "response.php?status=0";
+            $table =null;
 			$(document).ready(function(argument) {
-			var table = $('#account_dt').DataTable({
+			LoadGrid();
+		  	});
+
+              $("#pendingApprovals").click(function() {
+                $statusValue = "response.php?status=0";
+            table.destroy();
+
+			LoadGrid();
+
+            });
+            $("#approved").click(function() {
+                $statusValue = "response.php?status=1";
+            table.destroy();
+
+			LoadGrid();
+
+            });
+
+            $("#listAll").click(function() {
+                $statusValue = "response.php";
+            table.destroy();
+
+			LoadGrid();
+
+            });
+            
+                       
+                       function LoadGrid()
+        {
+             table = $('#account_dt').DataTable({
 				serverSide: true,
 				ajax:{
-						url :"response.php", // json datasource
+						url : $statusValue, // json datasource
 						type: "post",  // method  , by default get
+                        destroy : true,
+                        
 						error: function(){  // error handling
 							$(".account_dt-error").html("");
 							$("#account_dt").append('<tbody class="account_dt-error"><tr><th colspan="7">No data found in the server</th></tr></tbody>');
@@ -561,13 +602,7 @@ Change Image: <input type="file" name="files[]" multiple="multiple" id="files">
 			$('#search_input_dt').keyup(function(){
 				  table.search($(this).val()).draw() ;
 			});
-                        
-							
-                       
-			
-		  	});
-                       
-                       
+        }
 			
     	</script>
 
