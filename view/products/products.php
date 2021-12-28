@@ -1445,7 +1445,34 @@ public function headerscript()
 									?>
 								</small>
 							</p>
-
+							<p class="card-text">
+                            <?php
+                            $query_spec = mysqli_query($this->mysqlConfig(), "select DISTINCT(papf.addpost_fields_title),papf.addpost_fields_value,papf.addpost_fields_type from pic_addpost_field papf join pic_categories_fields pcf on papf.addpost_fields_categories_id = pcf.fields_categories_id and papf.field_id=pcf.fields_id where (papf.addpost_fields_type!='Chain' and papf.addpost_uni_id = '$adid') or (papf.addpost_fields_type='Numeric' and papf.pots_field_DV_id=0 and papf.addpost_uni_id = '$adid') group by papf.addpost_fields_title ORDER BY pcf.field_priority,pcf.fields_id ASC ");
+                            while ($row_spec = mysqli_fetch_object($query_spec)) {
+                                if (!empty($row_spec->addpost_fields_value)) {
+                            ?>
+							  <tr class="spec_row">
+                                        <td>
+                                            <p><?php
+                                                    $query = mysqli_query($this->mysqlConfig(), "select fields_title,field_value from pic_categories_fields where fields_id='$row_spec->addpost_fields_value'". " and field_displayinlist=0");
+                                                    $row = mysqli_fetch_object($query);?>
+													<?php
+													if(isset($row))
+													{?>
+														 <small class="text-muted">
+														 <strong>
+															 <?php echo $row_spec->addpost_fields_title ?>:</strong>
+														<?php
+														echo $row->field_value;	?>						
+														</small>
+													<?php }  ?></p>
+                                        </td>
+                                    </tr>
+                            <?php
+                                }
+                            }
+                            ?>
+							</p>
 						</div>
 					</div>
 				</div>

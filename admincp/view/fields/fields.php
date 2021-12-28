@@ -377,6 +377,7 @@ class fields extends config{
          <th>Title</td>
          <th align="center">Quick Edit</td>
          <th>MultiSelect</td>
+         <th>DisplayInListing</td>
          <th>Sample Text</td>
          <th>Order</td>
          <th>Values</td>
@@ -404,6 +405,11 @@ class fields extends config{
         <td align="center">
         <label>
              <input  class="form-check-input" type="checkbox" name="multi<?php echo $row_field->fields_id;?>" id="multi" <?php if($row_field->multi==1){ ?> checked <?php } ?> value="1">
+        </label>
+             </td>
+             <td align="center">
+        <label>
+             <input  class="form-check-input" type="checkbox" name="field_displayinlist<?php echo $row_field->fields_id;?>" id="field_displayinlist" <?php if($row_field->field_displayinlist==1){ ?> checked <?php } ?> value="1">
         </label>
              </td>
          <td><label>
