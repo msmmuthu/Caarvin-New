@@ -158,8 +158,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' and isset($_FILES['photo'])){
 	}
 		$multis= "multi".$fieldid[$i];
 		$multi = $_REQUEST[$multis];
-		
-		$cat_query = mysqli_query($this->mysqlConfig(),"UPDATE `pic_categories_fields` SET `field_priority` = '$field_pri[$i]',`fields_title` = '$field_name[$i]',`field_sample` = '$field_sample[$i]',`multi` = '$multi' WHERE ".$str."");
+		$displays = "displayinlist".$fieldid[$i];
+		$displayinlist = $_REQUEST[$displays];
+
+		$cat_query = mysqli_query($this->mysqlConfig(),"UPDATE `pic_categories_fields` SET `field_priority` = '$field_pri[$i]',`fields_title` = '$field_name[$i]',`field_sample` = '$field_sample[$i]',`multi` = '$multi', `displayinlist` = '$displayinlist' WHERE ".$str."");
 	
 	$i++;
 	}
@@ -241,7 +243,7 @@ mysqli_query($this->mysqlConfig(),"INSERT INTO `pic_categories_fields` (`fields_
        <div  style="background-color:#CCCCCC; padding:10px; width:95%; border-color:#fed82e;border-style:dashed;border-width:thin;border-radius:5px; height:100px;">
    
 	<?php
-	echo "dsds";
+	
 	$categories_id = $_REQUEST['catid'];
 	$type = $_REQUEST['type'];
 	$val = "Sample-".time();

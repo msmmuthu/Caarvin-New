@@ -115,7 +115,6 @@ class postad extends config
 			$value = str_replace(" ", "_", $row->fields_title);
 			if ($temp != $value) {
 				$fields_value = $_REQUEST[$value];
-
 				mysqli_query($this->mysqlConfig(), "insert into pic_addpost_field(addpost_fields_categories_id,addpost_uni_id,addpost_fields_title,addpost_fields_type,addpost_fields_value,field_id,pots_field_DV_id,addpost_fields_lan,addpost_fields_lon) values($category_id,'$ad_id_unique','$row->fields_title','$row->fields_type','$fields_value','$row->fields_id','$row->field_DV_id','$lan','$lon')");
 
 				$fields_value = "";
