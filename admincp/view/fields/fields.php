@@ -409,7 +409,7 @@ class fields extends config{
              </td>
              <td align="center">
         <label>
-             <input  class="form-check-input" type="checkbox" name="field_displayinlist<?php echo $row_field->fields_id;?>" id="field_displayinlist" <?php if($row_field->field_displayinlist==1){ ?> checked <?php } ?> value="1">
+             <input  class="form-check-input" type="checkbox" name="displayinlist<?php echo $row_field->fields_id;?>" id="displayinlist" <?php if($row_field->displayinlist==1){ ?> checked <?php } ?> value="1">
         </label>
              </td>
          <td><label>

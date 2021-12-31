@@ -158,10 +158,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' and isset($_FILES['photo'])){
 	}
 		$multis= "multi".$fieldid[$i];
 		$multi = $_REQUEST[$multis];
-		$displays = "field_displayinlist".$fieldid[$i];
-		$field_displayinlist = $_REQUEST[$displays];
+		$displays = "displayinlist".$fieldid[$i];
+		$displayinlist = $_REQUEST[$displays];
 
-		$cat_query = mysqli_query($this->mysqlConfig(),"UPDATE `pic_categories_fields` SET `field_priority` = '$field_pri[$i]',`fields_title` = '$field_name[$i]',`field_sample` = '$field_sample[$i]',`multi` = '$multi', `field_displayinlist` = '$field_displayinlist' WHERE ".$str."");
+		$cat_query = mysqli_query($this->mysqlConfig(),"UPDATE `pic_categories_fields` SET `field_priority` = '$field_pri[$i]',`fields_title` = '$field_name[$i]',`field_sample` = '$field_sample[$i]',`multi` = '$multi', `displayinlist` = '$displayinlist' WHERE ".$str."");
 	
 	$i++;
 	}

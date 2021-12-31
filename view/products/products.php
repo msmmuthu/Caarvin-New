@@ -1454,7 +1454,8 @@ public function headerscript()
 							  <tr class="spec_row">
                                         <td>
                                             <p><?php
-                                                    $query = mysqli_query($this->mysqlConfig(), "select fields_title,field_value from pic_categories_fields where fields_id='$row_spec->addpost_fields_value'". " and field_displayinlist=0");
+											if ($row_spec->addpost_fields_type == "DropDown") {
+                                                    $query = mysqli_query($this->mysqlConfig(), "select fields_title,field_value from pic_categories_fields where fields_id='$row_spec->addpost_fields_value'". " and displayinlist=1");
                                                     $row = mysqli_fetch_object($query);?>
 													<?php
 													if(isset($row))
@@ -1465,7 +1466,25 @@ public function headerscript()
 														<?php
 														echo $row->field_value;	?>						
 														</small>
-													<?php }  ?></p>
+													<?php 
+													} 
+													}
+													
+													 else {
+
+													$query = mysqli_query($this->mysqlConfig(), "select fields_title from pic_categories_fields where fields_title='$row_spec->addpost_fields_title'". " and displayinlist=1");
+													$row = mysqli_fetch_object($query);
+													if(isset($row))
+													{?>
+														<small class="text-muted">
+														<strong>
+															<?php echo $row_spec->addpost_fields_title ?>:</strong>
+														<?php
+														echo $row_spec->addpost_fields_value;	?>						
+														</small>
+													<?php
+													}}?>									
+											</p>
                                         </td>
                                     </tr>
                             <?php
