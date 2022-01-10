@@ -1427,24 +1427,7 @@ public function headerscript()
 								<p class="hint"><i class="fa fa-map-marker"></i> <?php echo $pic_post_city; ?></p>
 							<?php } ?>
 
-							<p class="card-text">
-								<small class="text-muted">
-									<strong>Posted on :</strong>
-									<i class="fa fa-clock"></i>
-									<?php
-									$date = date_create($pic_postdate);
-									echo date_format($date, 'd/m/Y');
-									?>
-								</small>
-							</p>
-							<p class="card-text">
-								<small class="text-muted">
-									<strong>Ad Id :</strong>
-									<?php
-									echo $adid;
-									?>
-								</small>
-							</p>
+							
 							<p class="card-text">
                             <?php
                             $query_spec = mysqli_query($this->mysqlConfig(), "select DISTINCT(papf.addpost_fields_title),papf.addpost_fields_value,papf.addpost_fields_type from pic_addpost_field papf join pic_categories_fields pcf on papf.addpost_fields_categories_id = pcf.fields_categories_id and papf.field_id=pcf.fields_id where (papf.addpost_fields_type!='Chain' and papf.addpost_uni_id = '$adid') or (papf.addpost_fields_type='Numeric' and papf.pots_field_DV_id=0 and papf.addpost_uni_id = '$adid') group by papf.addpost_fields_title ORDER BY pcf.field_priority,pcf.fields_id ASC ");
@@ -1491,6 +1474,24 @@ public function headerscript()
                                 }
                             }
                             ?>
+							</p>
+							<p class="card-text">
+								<small class="text-muted">
+									<strong>Posted on :</strong>
+									<i class="fa fa-clock"></i>
+									<?php
+									$date = date_create($pic_postdate);
+									echo date_format($date, 'd/m/Y');
+									?>
+								</small>
+							</p>
+							<p class="card-text">
+								<small class="text-muted">
+									<strong>Ad Id :</strong>
+									<?php
+									echo $adid;
+									?>
+								</small>
 							</p>
 						</div>
 					</div>
