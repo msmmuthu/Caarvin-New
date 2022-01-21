@@ -65,10 +65,11 @@ class product_detail extends config
         </div>
         <style type="text/css">
             .carousel {
-                height: 600px;
+                height: 300px;
                 background: #fff;
                 border: 1px solid #ccc;
                 padding: 10px;
+                width : 50%;
             }
 
             .carousel-caption {
@@ -81,7 +82,7 @@ class product_detail extends config
 
             .middle {
                 position: relative;
-                height: 500px;
+                height: 250px;
             }
 
             .middle img {
