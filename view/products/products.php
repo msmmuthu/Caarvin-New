@@ -251,6 +251,7 @@ public function headerscript()
 	public function list_products()
 	{
 
+
 		$this->headerscript();
 
 	?>
@@ -312,9 +313,11 @@ public function headerscript()
 		//echo "SELECT * , ( 3956 *2 * ASIN( SQRT( POWER( SIN( ( 10.6307 - pic_add_lan ) * PI( ) /180 /2 ) , 2 ) + COS( 10.6307 * PI( ) /180 ) * COS( pic_add_lan * PI( ) /180 ) * POWER( SIN( ( 79.3131 - pic_add_lon ) * PI( ) /180 /2 ) , 2 ) ) ) ) AS distance FROM pic_addpost HAVING distance <=20 and pic_category in ".$category_privacy." and pic_request=".$_REQUEST['type']." and addpost_status=1 order by distance LIMIT 5 OFFSET ".$_REQUEST['offset']."";
 
 		//$check_privacy = mysqli_query($this->mysqlConfig(),"select * from pic_addpost where pic_category in ".$category_privacy." and pic_request=".$_REQUEST['type']." and addpost_status=1 order by $order LIMIT 5 OFFSET ".$_REQUEST['offset']."");
+
+		
+
 		if (isset($uType) and strpos($uType, 'view') !== false and strpos($category_privacy, $_GET['cat_id']) !== false) { ?>
 			<div class="container" id="freezeid">
-
 				<div class="row">
 					<div class="col-sm-12 col-md-12 col-lg-12 pb-0">
 						<div class="fixed-top" style="top:auto;right:auto;left: auto;     z-index: 1000;">
@@ -414,6 +417,90 @@ public function headerscript()
 			</div>
 
 
+		<?php } else { ?>
+
+			<div class="container">
+				<div class="row">
+
+					<div class="col-sm-12 col-md-12 col-lg-4 pb-0"></div>
+					<div class="col-sm-12 col-md-12 col-lg-4 alert alert-light p-2 text-center" role="alert" style="border: 1px dashed #ccc;">
+
+						<i class="fa fa-exclamation-triangle fa-2x"></i>
+						<br />
+						<br />
+						<h6>You are not allowed to view ads!</h6>
+
+					</div>
+					<div class="col-sm-12 col-md-12 col-lg-4 pb-0"></div>
+				</div>
+
+			</div>
+		<?php } ?>
+
+
+
+	<?php
+	}
+
+	public function list_productswebsite()
+	{
+			
+
+		$this->headerscript();
+	?>
+		
+		<?php
+
+		$cat_ids = $_GET['cat_id'];
+		$subcat_query = mysqli_query($this->mysqlConfig(), "SELECT * FROM  `pic_website` where id=$cat_ids");
+		$row_subcat_query = mysqli_fetch_object($subcat_query);
+
+	    if(isset($_GET['cat_id'])){		
+		 ?>
+		 <div class="container">
+        <div class="row mt-4">
+        <?php
+		$i = 1;
+		$cat_query = mysqli_query($this->mysqlConfig(),"select * from pic_website where status=1 order by website_name ASC");
+		while($row = mysqli_fetch_array($cat_query)){
+		if($i!=1){		
+			$class = "m-left";		
+		}
+		else{		
+			$class = "";		
+		}
+		?>
+        	<div class="col-4 col-sm-3 col-md-3 col-lg-3 pb-3 pt-3 mb-3 mt-3 box text-center cat_thum">
+            	<div class="bg-light " style="border: 1px solid #d5d6d8;">
+                <a href="<?php echo $row['website_url']; ?>" target="_blank">
+            	
+					<?php
+                    if($row['logo']==""){
+                    ?>
+                    <i class="fa fa-2x <?php echo $row['logo']; ?>"></i>
+                    <?php } else { ?>
+                    <img class="p-1" width="75" height="75" src="admincp/media/weblogo/<?php echo $row['logo']; ?>" />
+                    <?php } ?>
+                    
+                
+                </a>
+                </div>
+                <div class="bg-secondary text-black" style="text-transform:lowercase;background-color:#CCCCCC !important"><?php echo $row['website_name']; ?></div>
+            </div>
+         <?php
+		
+		$i=$i+1;
+		}
+		
+		 ?>  
+       
+        </div>
+        </div>
+        
+       
+      
+  
+			
 		<?php } else { ?>
 
 			<div class="container">
@@ -1329,12 +1416,11 @@ public function headerscript()
 
 	public function loopAds($adid, $adsuserid, $pic_title, $pic_discription, $pic_add_taluk, $pic_post_city, $pic_postdate, $pic_price)
 	{
+
 		$cat_price_label = $this->category();
 		$userid = $_SESSION['pic']['biscuit']['userid'];
 		$queryuser = mysqli_query($this->mysqlConfig(), "SELECT * FROM `pic_user` where user_id = $userid limit 1");
 		$rowuser = mysqli_fetch_object($queryuser);
-		
-
 
 		$like_query = mysqli_query($this->mysqlConfig(), "SELECT * FROM  `pic_likes` where likes_product_id='$adid' and likes_cus_id=" . $_SESSION['pic']['biscuit']['userid'] . "");
 		$like_no = mysqli_num_rows($like_query);
@@ -1354,14 +1440,8 @@ public function headerscript()
 		$profileUser = mysqli_query($this->mysqlConfig(), "SELECT user_pic FROM `pic_user` where user_id = $adsuserid limit 1");
 		$rowProfileUser = mysqli_fetch_object($profileUser);
 
-		//if($rowProfileUser->user_pic==''){
-		//	$profile_img_url = 'img/avatar.jpg';
-		//}
-		//else{
-		//	$profile_img_url = 'media/profile/'.$rowProfileUser->user_pic;
-		//}
-
 	?>
+
 
 		<?php
         if ($like_no == 1) { ?> 

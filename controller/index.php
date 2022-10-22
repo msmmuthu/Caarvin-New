@@ -82,12 +82,20 @@ class indexcontroller {
 		//require("view/static/footer.php");
         }
 		
-		elseif (isset($_REQUEST['action']) and $_REQUEST['action'] == "view" && $_REQUEST['module'] == "products" && isset($_REQUEST['cat_id']) && !isset($_REQUEST['filter'])) {
-		require("view/static/header.php");
-		$instanceClass->list_products();
-		require("view/static/footer.php");
-        }
-        
+		     
+        elseif (isset($_REQUEST['action']) and $_REQUEST['action'] == "view" && $_REQUEST['module'] == "products" && isset($_REQUEST['cat_id']) && !isset($_REQUEST['filter'])) {          
+            require("view/static/header.php");
+            if($_REQUEST['cat_id']  == '109'){
+
+                  $instanceClass->list_productswebsite();
+
+            }else{
+
+                  $instanceClass->list_products();
+
+            }
+            require("view/static/footer.php");
+      }
         // SEARCH 
         
         	elseif (isset($_REQUEST['action'],$_REQUEST['post']) and $_REQUEST['action'] == "view" && $_REQUEST['module'] == "search" && $_REQUEST['post'] == "selectads") {
