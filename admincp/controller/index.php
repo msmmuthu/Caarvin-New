@@ -71,14 +71,26 @@ class indexcontroller extends config{
 					$instanceClass->listing();
 					require("view/static/footer.php");
 				}
-				
+				//Website
+				elseif(isset($_REQUEST['action']) && $_REQUEST['action'] == "view" && $_REQUEST['module'] == "website" && $_REQUEST['post'] == "list"){
+					require("view/static/header.php");
+					$instanceClass->listing();
+					require("view/static/footer.php");
+				}
+				elseif(isset($_REQUEST['action']) && $_REQUEST['action'] == "view" && $_REQUEST['module'] == "website" && $_REQUEST['post'] == "addnew"){
+					require("view/static/header.php");
+					$instanceClass->form();
+					require("view/static/footer.php");
+				}
+				//website 			
 				
 				elseif(isset($_REQUEST['action']) && $_REQUEST['action'] == "view" && $_REQUEST['module'] == "category" && $_REQUEST['post'] == "sub"){
 					require("view/static/header.php");
 					$instanceClass->listing();
 					require("view/static/footer.php");
 				}
-				elseif(isset($_REQUEST['action']) && $_REQUEST['action'] == "model" && $_REQUEST['module'] == "category" && $_REQUEST['post'] == "hidden"){
+				elseif(isset($_REQUEST['action']) && $_REQUEST['action'] == "model" && $_REQUEST['module'] == "category" && $_REQUEST['post'] == "hidden"){ 
+
 					require("view/static/header.php");
 					$instanceClass->hide();
 					require("view/static/footer.php");
@@ -97,6 +109,8 @@ class indexcontroller extends config{
 					$instanceClass->selectAjaxValues();
 				}
 				elseif(isset($_REQUEST['action']) && $_REQUEST['action'] == "view" && $_REQUEST['module'] == "fields" && $_REQUEST['post'] == "edit"){
+					
+					
 					require("view/static/header.php");
 					$instanceClass->general();
 					require("view/static/footer.php");
@@ -387,12 +401,43 @@ class indexcontroller extends config{
                                 
 				elseif(isset($_REQUEST['action']) && $_REQUEST['action'] == "model" && $module == "category"){
 					$instanceClass->insert();
-					}
-					
+				}					
 				elseif(isset($_REQUEST['action']) && $_REQUEST['action'] == "model" && $module == "edtcategory"){
 					$instanceClass->update();
-					}
-					
+				}
+				// website link add	
+				elseif(isset($_REQUEST['action']) && $_REQUEST['action'] == "model" && $_REQUEST['module'] == "website" && $_REQUEST['post'] == "hidden"){
+				
+					require("view/static/header.php");
+					$instanceClass->hide();
+					require("view/static/footer.php");
+				}
+				elseif(isset($_REQUEST['action']) && $_REQUEST['action'] == "model" && $_REQUEST['module'] == "website" && $_REQUEST['post'] == "delete"){
+					require("view/static/header.php");
+					$instanceClass->delete();
+					require("view/static/footer.php");
+				}
+				elseif(isset($_REQUEST['action']) && $_REQUEST['action'] == "model" && $module == "website"){
+					$instanceClass->insert();
+				}					
+				elseif(isset($_REQUEST['action']) && $_REQUEST['action'] == "model" && $module == "edtwebsite"){
+					$instanceClass->update();
+				}	
+				elseif(isset($_REQUEST['action']) && $_REQUEST['action'] == "view" && $_REQUEST['module'] == "editwebsite" && $_REQUEST['post'] == "edit"){
+
+					require("view/static/header.php");
+					$instanceClass->general();
+					require("view/static/footer.php");
+				}		
+				elseif(isset($_REQUEST['action']) && $_REQUEST['action'] == "model" && $_REQUEST['module'] == "editwebsite" && $_REQUEST['post'] == "general"){
+					require("view/static/header.php");
+					$instanceClass->general();
+					require("view/static/footer.php");
+				}
+
+
+				//wesbite		
+
 				elseif(isset($_REQUEST['action']) && $_REQUEST['action'] == "model" && $module == "users"){
 					$instanceClass->insert();
 					
